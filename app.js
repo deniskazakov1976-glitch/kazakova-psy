@@ -151,6 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправка...';
 
+      // Фиксация конверсии отправки формы в веб-аналитике
+      trackAnalyticsEvent('form_submit', {
+        topic: topicSelect ? topicSelect.value : 'not_selected',
+        format: formatRadio ? formatRadio.value : 'online'
+      });
+
       // Эмуляция защищенной отправки (в продакшене здесь отправка в Telegram-бот или на email)
       setTimeout(() => {
         submitBtn.style.display = 'none';
@@ -193,5 +199,67 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // --------------------------------------------------------------------------
+  // 5. Веб-аналитика и фиксация целей (Метрика, GA4, VK Pixel)
+  // --------------------------------------------------------------------------
+  function trackAnalyticsEvent(goalName, params = {}) {
+    const cfg = window.ANALYTICS_CONFIG || {};
+
+    // 1. Отладочный вывод в консоль браузера (F12 -> Console)
+    if (cfg.debug !== false) {
+      console.log(
+        '%c[Цель аналитики] ' + goalName,
+        'background: #2D5A43; color: #FFFFFF; font-weight: bold; padding: 3px 8px; border-radius: 4px;',
+        params
+      );
+    }
+
+    // 2. Яндекс.Метрика
+    try {
+      if (cfg.ymId && cfg.ymId !== 'XXXXXXXX' && typeof window.ym === 'function') {
+        window.ym(cfg.ymId, 'reachGoal', goalName, params);
+      }
+    } catch (err) {
+      console.warn('[Analytics] Ошибка отправки цели в Яндекс.Метрику:', err);
+    }
+
+    // 3. Google Analytics 4
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', goalName, params);
+      }
+    } catch (err) {
+      console.warn('[Analytics] Ошибка отправки цели в GA4:', err);
+    }
+
+    // 4. VK Реклама (VK Pixel)
+    try {
+      if (window.VK && window.VK.Retargeting && typeof window.VK.Retargeting.Event === 'function') {
+        window.VK.Retargeting.Event(goalName);
+      }
+    } catch (err) {
+      console.warn('[Analytics] Ошибка отправки цели в VK Pixel:', err);
+    }
+  }
+
+  // Слушатель кликов по всем элементам с атрибутом data-analytics-goal
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('[data-analytics-goal]');
+    if (!target) return;
+
+    const goal = target.getAttribute('data-analytics-goal');
+    const location = target.getAttribute('data-analytics-location') || 'page';
+
+    trackAnalyticsEvent(goal, { location: location });
+  });
+
+  // Уведомление об успешной инициализации аналитики в консоли
+  if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.debug !== false) {
+    console.log(
+      '%c[Аналитика] Система отслеживания активна! Клики по кнопкам («Записаться», Telegram, WhatsApp) и отправка формы фиксируются.',
+      'background: #2D5A43; color: #EAF4EE; font-weight: bold; padding: 4px 10px; border-radius: 4px;'
+    );
+  }
 });
 

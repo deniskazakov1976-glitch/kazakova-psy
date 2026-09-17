@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Евгения Казакова — Психоаналитический консультант | Пермь и Онлайн</title>
+  <title>Евгения Казакова — Психоаналитический терапевт | Пермь и Онлайн</title>
   <meta name="description" content="Индивидуальные психоаналитические консультации в Перми и онлайн. Глубинная работа с повторяющимися сценариями, тревогой, кризисами и отношениями. Без шаблонных советов.">
   <meta name="keywords" content="психоаналитический консультант, психоанализ Пермь, психотерапия онлайн, психолог Пермь, Евгения Казакова, глубинная терапия">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="Евгения Казакова — Психоаналитический консультант">
+  <meta property="og:title" content="Евгения Казакова — Психоаналитический терапевт">
   <meta property="og:description" content="Глубинная работа с причинами тревоги, кризисов и сложностей в отношениях. Конфиденциально, бережно, профессионально.">
   <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%232D5A43%22/><text x=%2216%22 y=%2221%22 font-size=%2214%22 font-family=%22Georgia,serif%22 font-weight=%22bold%22 fill=%22%23FAF8F5%22 text-anchor=%22middle%22>Е</text></svg>">
   
   <!-- Подключение шрифта Cormorant Garamond для благородных заголовков -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +22,80 @@
   
   <!-- Стили -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- ======================================================================
+       Веб-аналитика и рекламные пиксели (Конфигурация)
+       ИНСТРУКЦИЯ: Чтобы активировать аналитику, замените 'XXXXXXXX' на ваш
+       реальный номер счётчика Яндекс.Метрики. Подробнее см. ANALYTICS_SETUP.md
+       ====================================================================== -->
+  <script>
+    window.ANALYTICS_CONFIG = {
+      // 1. Яндекс.Метрика: номер счётчика (например, '98765432')
+      ymId: 'XXXXXXXX',
+
+      // 2. Google Analytics 4: идентификатор потока данных (например, 'G-ABC123XYZ0')
+      ga4Id: '',
+
+      // 3. Пиксель VK Рекламы (например, 'VK-RTRG-123456-ABCDE')
+      vkPixelId: '',
+
+      // Режим отладки: выводит все события целей в консоль браузера (F12 -> Console)
+      debug: true
+    };
+  </script>
+
+  <!-- Яндекс.Метрика (Yandex.Metrika) -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.ymId && window.ANALYTICS_CONFIG.ymId !== 'XXXXXXXX') {
+      ym(window.ANALYTICS_CONFIG.ymId, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+      });
+    }
+  </script>
+  <noscript>
+    <div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div>
+  </noscript>
+
+  <!-- Google tag (gtag.js) - Google Analytics 4 (активируется при заполнении ga4Id) -->
+  <script>
+    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.ga4Id && window.ANALYTICS_CONFIG.ga4Id.startsWith('G-')) {
+      var gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.ANALYTICS_CONFIG.ga4Id;
+      document.head.appendChild(gaScript);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', window.ANALYTICS_CONFIG.ga4Id);
+    }
+  </script>
+
+  <!-- Пиксель VK Реклама (активируется при заполнении vkPixelId) -->
+  <script>
+    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.vkPixelId && window.ANALYTICS_CONFIG.vkPixelId.startsWith('VK-')) {
+      var vkInitScript = document.createElement('script');
+      vkInitScript.type = 'text/javascript';
+      vkInitScript.async = true;
+      vkInitScript.src = 'https://vk.com/js/api/openapi.js?169';
+      vkInitScript.onload = function() {
+        if (window.VK && window.VK.Retargeting) {
+          VK.Retargeting.Init(window.ANALYTICS_CONFIG.vkPixelId);
+          VK.Retargeting.Hit();
+        }
+      };
+      document.head.appendChild(vkInitScript);
+    }
+  </script>
 </head>
 <body>
 
@@ -28,8 +105,8 @@
   <header class="header">
     <div class="container header-inner">
       <a href="#" class="header-brand" aria-label="Главная страница">
-        <span class="brand-name">Евгения Казакова</span>
-        <span class="brand-title">Психоаналитический консультант</span>
+        <span class="brand-name">Евгения Викторовна Казакова</span>
+        <span class="brand-title">Психоаналитический терапевт</span>
       </a>
 
       <nav class="nav" aria-label="Основная навигация">
@@ -45,11 +122,11 @@
       </nav>
 
       <div class="header-cta">
-        <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="messenger-link telegram" title="Написать в Telegram">
+        <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="messenger-link telegram" title="Написать в Telegram" data-analytics-goal="telegram_click" data-analytics-location="header">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
           <span>Telegram</span>
         </a>
-        <button type="button" class="btn btn-primary btn-sm open-booking-modal">
+        <button type="button" class="btn btn-primary btn-sm open-booking-modal" data-analytics-goal="booking_click" data-analytics-location="header">
           Записаться
         </button>
       </div>
@@ -87,7 +164,7 @@
 
           <div class="hero-actions">
             <div>
-              <button type="button" class="btn btn-primary open-booking-modal">
+              <button type="button" class="btn btn-primary open-booking-modal" data-analytics-goal="booking_click" data-analytics-location="hero">
                 Записаться на установочную встречу
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
@@ -96,11 +173,11 @@
             <div class="hero-messengers">
               <span class="messengers-caption">Или задайте быстрый организационный вопрос лично:</span>
               <div class="messenger-buttons-row">
-                <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="messenger-link telegram">
+                <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="messenger-link telegram" data-analytics-goal="telegram_click" data-analytics-location="hero">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
                   <span>Telegram</span>
                 </a>
-                <a href="https://wa.me/79026366133?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0.%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener" class="messenger-link whatsapp">
+                <a href="https://wa.me/79026366133?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0.%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener" class="messenger-link whatsapp" data-analytics-goal="whatsapp_click" data-analytics-location="hero">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24"/></svg>
                   <span>WhatsApp</span>
                 </a>
@@ -112,10 +189,10 @@
         <div class="hero-visual">
           <div class="portrait-wrapper">
             <div class="portrait-frame">
-              <img src="images/evgeniya-kazakova.jpg" alt="Евгения Викторовна Казакова — Психоаналитический консультант" class="portrait-img" width="380" height="475" loading="eager">
+              <img src="images/evgeniya-kazakova.jpg" alt="Евгения Викторовна Казакова — Психоаналитический терапевт" class="portrait-img" width="380" height="475" loading="eager">
               <div class="portrait-badge">
                 <span class="badge-name">Евгения Викторовна Казакова</span>
-                <span class="badge-status">Психоаналитический консультант · Стаж 22 года</span>
+                <span class="badge-status">Психоаналитический терапевт · Стаж 22 года</span>
               </div>
             </div>
           </div>
@@ -295,6 +372,19 @@
                 <div>
                   <strong>МИП (Московский институт психоанализа)</strong>
                   <span>Профессиональное психоаналитическое образование и регулярное повышение квалификации.</span>
+                </div>
+              </li>
+
+              <li class="credential-item">
+                <span class="check-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <strong>Диссертационное исследование</strong>
+                  <span>Тема: «Послеродовая депрессия и материнская идентичность». Научная работа на стыке перинатальной психологии и психоанализа.</span>
+                  <span class="dissertation-cta">
+                    Если вы мама малыша до 1&nbsp;года — вы можете <a href="https://docs.google.com/forms/d/1Ur2hMmGZqphJd5PXDZ7doViF7myhaJw-jZm6f-TBpHc/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" data-analytics-goal="dissertation_survey_click" data-analytics-location="about_credentials">пройти анонимный опрос</a> и по желанию получить обратную связь.
+                  </span>
                 </div>
               </li>
             </ul>
@@ -535,7 +625,7 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary open-booking-modal">
+          <button type="button" class="btn btn-primary open-booking-modal" data-analytics-goal="booking_click" data-analytics-location="conditions">
             Записаться на сессию
           </button>
         </div>
@@ -555,7 +645,7 @@
         <div class="contact-layout">
           <!-- Каналы прямого контакта -->
           <div class="contact-channels">
-            <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="channel-card">
+            <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="channel-card" data-analytics-goal="telegram_click" data-analytics-location="contacts">
               <div class="channel-info">
                 <div class="channel-icon tg" aria-hidden="true">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
@@ -568,7 +658,7 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
 
-            <a href="https://wa.me/79026366133?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0.%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener" class="channel-card">
+            <a href="https://wa.me/79026366133?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0.%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener" class="channel-card" data-analytics-goal="whatsapp_click" data-analytics-location="contacts">
               <div class="channel-info">
                 <div class="channel-icon wa" aria-hidden="true">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24"/></svg>
@@ -754,8 +844,8 @@
         <div>
           <h4 class="footer-heading">Контакты</h4>
           <ul class="footer-links">
-            <li><a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="footer-link">Telegram: @KazakovaEvgeniya</a></li>
-            <li><a href="https://wa.me/79026366133" target="_blank" rel="noopener" class="footer-link">WhatsApp: +7 (902) 636-61-33</a></li>
+            <li><a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="footer-link" data-analytics-goal="telegram_click" data-analytics-location="footer">Telegram: @KazakovaEvgeniya</a></li>
+            <li><a href="https://wa.me/79026366133" target="_blank" rel="noopener" class="footer-link" data-analytics-goal="whatsapp_click" data-analytics-location="footer">WhatsApp: +7 (902) 636-61-33</a></li>
             <li><span class="footer-link" style="color: #727C82;">Очный приём: г. Пермь</span></li>
           </ul>
         </div>
@@ -787,7 +877,7 @@
       <p class="modal-lead">Выберите наиболее удобный для вас способ первого контакта:</p>
 
       <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
-        <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="channel-card" style="padding: 16px 20px;">
+        <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="channel-card" style="padding: 16px 20px;" data-analytics-goal="telegram_click" data-analytics-location="modal">
           <div class="channel-info">
             <div class="channel-icon tg" style="width: 36px; height: 36px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
@@ -800,7 +890,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
 
-        <a href="https://wa.me/79026366133?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0.%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener" class="channel-card" style="padding: 16px 20px;">
+        <a href="https://wa.me/79026366133?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0.%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8" target="_blank" rel="noopener" class="channel-card" style="padding: 16px 20px;" data-analytics-goal="whatsapp_click" data-analytics-location="modal">
           <div class="channel-info">
             <div class="channel-icon wa" style="width: 36px; height: 36px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24"/></svg>
@@ -818,7 +908,7 @@
         <p style="font-size: 0.9rem; margin-bottom: 12px; color: var(--text-tertiary);">
           Или оставьте телефон/контакт в форме на странице:
         </p>
-        <button type="button" class="btn btn-secondary btn-block scrollToFormBtn">
+        <button type="button" class="btn btn-secondary btn-block scrollToFormBtn" data-analytics-goal="booking_click" data-analytics-location="modal_to_form">
           Перейти к форме заявки
         </button>
       </div>
@@ -856,6 +946,6 @@
   </div>
 
   <!-- Скрипты -->
-  <script src="app.js"></script>
+  <script src="app.js?v=1.1"></script>
 </body>
 </html>

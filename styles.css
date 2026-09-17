@@ -595,6 +595,29 @@ section {
   color: var(--text-secondary);
 }
 
+.dissertation-cta {
+  display: block;
+  margin-top: 8px;
+  padding: 10px 14px;
+  background-color: var(--accent-sage-light);
+  border-radius: var(--radius-subtle);
+  font-size: 0.86rem !important;
+  color: #21352A !important;
+  line-height: 1.5;
+}
+
+.dissertation-cta a {
+  color: var(--accent-sage);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.dissertation-cta a:hover {
+  color: var(--text-primary);
+}
+
 .supervision-box {
   background-color: var(--accent-sage-light);
   border-left: 3px solid var(--accent-sage);
