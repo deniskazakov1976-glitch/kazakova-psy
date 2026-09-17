@@ -25,13 +25,11 @@
 
   <!-- ======================================================================
        Веб-аналитика и рекламные пиксели (Конфигурация)
-       ИНСТРУКЦИЯ: Чтобы активировать аналитику, замените 'XXXXXXXX' на ваш
-       реальный номер счётчика Яндекс.Метрики. Подробнее см. ANALYTICS_SETUP.md
        ====================================================================== -->
   <script>
     window.ANALYTICS_CONFIG = {
-      // 1. Яндекс.Метрика: номер счётчика (например, '98765432')
-      ymId: 'XXXXXXXX',
+      // 1. Яндекс.Метрика: номер счётчика
+      ymId: '112744330',
 
       // 2. Google Analytics 4: идентификатор потока данных (например, 'G-ABC123XYZ0')
       ga4Id: '',
@@ -44,26 +42,19 @@
     };
   </script>
 
-  <!-- Яндекс.Метрика (Yandex.Metrika) -->
+  <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112744330', 'ym');
 
-    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.ymId && window.ANALYTICS_CONFIG.ymId !== 'XXXXXXXX') {
-      ym(window.ANALYTICS_CONFIG.ymId, "init", {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        webvisor: true
-      });
-    }
+    ym(112744330, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
   </script>
-  <noscript>
-    <div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div>
-  </noscript>
+  <noscript><div><img src="https://mc.yandex.ru/watch/112744330" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
 
   <!-- Google tag (gtag.js) - Google Analytics 4 (активируется при заполнении ga4Id) -->
   <script>
