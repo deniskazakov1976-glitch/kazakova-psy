@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>analytics harness</title>
+<style>
+  body { font-family: monospace; margin: 0; }
+  iframe { border: 0; display: block; }
+  #out { white-space: pre-wrap; padding: 8px; }
+</style>
+</head>
+<body>
+<div id="frames"></div>
+<pre id="out">RUNNING</pre>
+<script>
+const SRC = '../index.html';
+const CONSENT_KEY = 'kazakova_consent_v1';
+const results = { before: {}, after: {}, goals: [], decline: {}, persistence: {}, errors: [] };
+
+function loadFrame(width, height) {
+  return new Promise((resolve) => {
+    const f = document.createElement('iframe');
+    f.width = width || 390;
+    f.height = height || 844;
+    f.src = SRC;
+    f.addEventListener('load', () => resolve(f));
+    document.getElementById('frames').appendChild(f);
+  });
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function metrikaScripts(d) {
+  return Array.from(d.querySelectorAll('script[src*="mc.yandex.ru"]')).map((s) => s.src);
+}
+
+function queued(win) {
+  if (typeof win.ym !== 'function' || !win.ym.a) return [];
+  return win.ym.a.map((args) => Array.from(args));
+}
+
+function reachGoals(calls) {
+  return calls.filter((c) => c[1] === 'reachGoal').map((c) => ({ goal: c[2], params: c[3] }));
+}
+
+(async function () {
+  try {
+    // ---------- 1. До согласия ----------
+    const f1 = await loadFrame();
+    const w1 = f1.contentWindow;
+    const d1 = f1.contentDocument;
+    try { w1.localStorage.removeItem(CONSENT_KEY); } catch (e) { /* приватный режим */ }
+
+    results.before.bannerVisible = !d1.getElementById('cookieBanner').hidden;
+    results.before.metrikaScripts = metrikaScripts(d1).length;
+    results.before.ymType = typeof w1.ym;
+    results.before.allScripts = Array.from(d1.querySelectorAll('script[src]')).map((s) => s.src);
+
+    // Клик по Telegram до согласия — трекинг не должен включаться
+    const tg = d1.querySelector('a[href*="t.me"]');
+    tg.click();
+    await sleep(60);
+    results.before.ymAfterClick = typeof w1.ym;
+    results.before.scriptsAfterClick = metrikaScripts(d1).length;
+
+    // ---------- 2. Приняли cookie ----------
+    d1.getElementById('cookieAccept').click();
+    await sleep(150);
+
+    const calls = queued(w1);
+    const init = calls.find((c) => c[1] === 'init');
+    results.after.metrikaScripts = metrikaScripts(d1);
+    results.after.ymType = typeof w1.ym;
+    results.after.initParams = init ? init[2] : null;
+    results.after.initCounter = init ? init[0] : null;
+    results.after.bannerHidden = d1.getElementById('cookieBanner').hidden;
+    try { results.after.consentStored = w1.localStorage.getItem(CONSENT_KEY); } catch (e) { results.after.consentStored = 'unavailable'; }
+
+    // ---------- 3. Цели ----------
+    tg.click();
+    await sleep(40);
+    d1.querySelector('.open-booking-modal').click();
+    await sleep(120);
+    d1.dispatchEvent(new w1.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await sleep(60);
+
+    const form = d1.getElementById('mainBookingForm');
+    d1.getElementById('clientName').value = 'Секретное Имя';
+    d1.getElementById('clientContact').value = '@secret_login';
+    d1.getElementById('clientConsent').checked = true;
+    w1.open = function () { return { focus() {} }; };
+    form.dispatchEvent(new w1.Event('submit', { bubbles: true, cancelable: true }));
+    await sleep(200);
+
+    results.goals = reachGoals(queued(w1));
+    results.goalsRaw = JSON.stringify(queued(w1));
+
+    // ---------- 4. Отказ ----------
+    // Снимаем сохранённое согласие ДО загрузки второго фрейма, иначе он
+    // стартует уже с аналитикой и отказ нечего проверять.
+    try { w1.localStorage.removeItem(CONSENT_KEY); } catch (e) {}
+    const f2 = await loadFrame();
+    const w2 = f2.contentWindow;
+    const d2 = f2.contentDocument;
+    d2.getElementById('cookieDecline').click();
+    await sleep(150);
+    results.decline.metrikaScripts = metrikaScripts(d2).length;
+    results.decline.ymType = typeof w2.ym;
+    results.decline.bannerHidden = d2.getElementById('cookieBanner').hidden;
+
+    // ---------- 5. Согласие запомнено ----------
+    try {
+      w2.localStorage.setItem(CONSENT_KEY, 'all');
+      results.persistence.storageWorks = true;
+    } catch (e) {
+      results.persistence.storageWorks = false;
+    }
+    if (results.persistence.storageWorks) {
+      const f3 = await loadFrame();
+      const d3 = f3.contentDocument;
+      const w3 = f3.contentWindow;
+      await sleep(150);
+      results.persistence.bannerHidden = d3.getElementById('cookieBanner').hidden;
+      results.persistence.ymType = typeof w3.ym;
+      results.persistence.scripts = metrikaScripts(d3).length;
+      try { w3.localStorage.removeItem(CONSENT_KEY); } catch (e) {}
+    }
+
+    document.getElementById('out').textContent = 'RESULT ' + JSON.stringify(results);
+  } catch (err) {
+    document.getElementById('out').textContent = 'REPORTERROR ' + ((err && err.stack) || err);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>harness</title>
+<style>
+  body { font-family: monospace; margin: 0; }
+  iframe { border: 0; display: block; }
+  #out { white-space: pre-wrap; padding: 8px; }
+</style>
+</head>
+<body>
+<div id="frames"></div>
+<pre id="out">RUNNING</pre>
+<script>
+const SRC = '../index.html';
+const WIDTHS = [320, 360, 375, 390, 414, 768, 1024, 1440];
+const results = { widths: {}, interactions: {}, errors: [] };
+
+function loadFrame(width, height) {
+  return new Promise((resolve) => {
+    const f = document.createElement('iframe');
+    f.width = width;
+    f.height = height;
+    f.src = SRC;
+    f.addEventListener('load', () => resolve(f));
+    document.getElementById('frames').appendChild(f);
+  });
+}
+
+function measure(frame) {
+  const d = frame.contentDocument;
+  const de = d.documentElement;
+  const cta = d.querySelector('.hero-actions .btn');
+  const toggle = d.getElementById('navToggle');
+  const nav = d.getElementById('primaryNav');
+  const cs = (el) => el ? frame.contentWindow.getComputedStyle(el) : null;
+  const ctaRect = cta ? cta.getBoundingClientRect() : null;
+  const toggleCs = cs(toggle);
+  const navCs = cs(nav);
+  const headerCta = d.querySelector('.header-cta .btn');
+  const banner = d.getElementById('cookieBanner');
+  const bannerRect = banner && !banner.hidden ? banner.getBoundingClientRect() : null;
+  return {
+    clientWidth: de.clientWidth,
+    scrollWidth: de.scrollWidth,
+    clientHeight: de.clientHeight,
+    ctaTop: ctaRect ? Math.round(ctaRect.top) : null,
+    ctaBottom: ctaRect ? Math.round(ctaRect.bottom) : null,
+    bannerTop: bannerRect ? Math.round(bannerRect.top) : null,
+    bannerHeight: bannerRect ? Math.round(bannerRect.height) : null,
+    ctaHeight: ctaRect ? Math.round(ctaRect.height) : null,
+    ctaWidth: ctaRect ? Math.round(ctaRect.width) : null,
+    toggleDisplay: toggleCs ? toggleCs.display : null,
+    toggleSize: toggle ? [Math.round(toggle.getBoundingClientRect().width), Math.round(toggle.getBoundingClientRect().height)] : null,
+    navDisplay: navCs ? navCs.display : null,
+    headerCtaSize: headerCta ? [Math.round(headerCta.getBoundingClientRect().width), Math.round(headerCta.getBoundingClientRect().height)] : null,
+    headerCtaRight: headerCta ? Math.round(headerCta.getBoundingClientRect().right) : null,
+    bodyOverflowX: cs(d.body) ? cs(d.body).overflowX : null
+  };
+}
+
+function fail(name, detail) {
+  results.errors.push(name + (detail ? ': ' + detail : ''));
+}
+
+(async function () {
+  try {
+    // --- Геометрия на разных ширинах ---
+    for (const w of WIDTHS) {
+      const frame = await loadFrame(w, 844);
+      results.widths[w] = measure(frame);
+    }
+
+    // --- Интерактив на 390x844 ---
+    const frame = await loadFrame(390, 844);
+    const win = frame.contentWindow;
+    const d = frame.contentDocument;
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    // Мобильное меню
+    const toggle = d.getElementById('navToggle');
+    const nav = d.getElementById('primaryNav');
+    results.interactions.navBefore = win.getComputedStyle(nav).display;
+    toggle.click();
+    results.interactions.navAfterClick = win.getComputedStyle(nav).display;
+    results.interactions.navAriaAfterClick = toggle.getAttribute('aria-expanded');
+    toggle.click();
+    results.interactions.navAfterClose = win.getComputedStyle(nav).display;
+
+    // Модальное окно: фокус, inert, возврат
+    const opener = d.querySelector('.open-booking-modal');
+    const modal = d.getElementById('bookingModal');
+    opener.focus();
+    opener.click();
+    await sleep(120);
+    const active = d.activeElement;
+    results.interactions.modalOpen = modal.classList.contains('active');
+    results.interactions.modalFocusInside = !!active && modal.contains(active);
+    results.interactions.activeInfo = active ? [active.tagName, active.id, active.className] : null;
+    results.interactions.backgroundInert = d.querySelector('main').inert === true;
+    results.interactions.bodyLocked = win.getComputedStyle(d.body).overflow === 'hidden';
+
+    d.dispatchEvent(new win.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await sleep(80);
+    results.interactions.modalClosed = !modal.classList.contains('active');
+    results.interactions.focusReturned = d.activeElement === opener;
+    results.interactions.backgroundRestored = d.querySelector('main').inert === false;
+
+    // Форма: валидация без согласия
+    const form = d.getElementById('mainBookingForm');
+    d.getElementById('clientName').value = 'Тест';
+    d.getElementById('clientContact').value = '@test';
+    form.dispatchEvent(new win.Event('submit', { bubbles: true, cancelable: true }));
+    await sleep(60);
+    results.interactions.consentErrorShown = !d.getElementById('consentError').hidden;
+    results.interactions.successHiddenOnInvalid = d.getElementById('formSuccess').hidden;
+
+    // Форма: успешная доставка через Telegram (window.open подменён)
+    let openedUrl = null;
+    win.open = function (url) { openedUrl = url; return { focus() {} }; };
+    d.getElementById('clientConsent').checked = true;
+    d.getElementById('clientTopic').value = 'anxiety';
+    form.dispatchEvent(new win.Event('submit', { bubbles: true, cancelable: true }));
+    await sleep(200);
+    results.interactions.openedUrl = openedUrl;
+    results.interactions.successShown = !d.getElementById('formSuccess').hidden;
+    results.interactions.statusText = d.getElementById('formStatus').textContent.trim();
+    results.interactions.telegramHasText = !!openedUrl && openedUrl.indexOf('?text=') > -1;
+
+    // --- Доступность: skip-link, aria, тач-таргеты на 390 ---
+    results.interactions.skipLink = !!d.querySelector('.skip-link');
+    const closeBtn = d.getElementById('closeBookingModal');
+    const cbRect = closeBtn.getBoundingClientRect();
+    results.interactions.modalCloseSize = [Math.round(cbRect.width), Math.round(cbRect.height)];
+    results.interactions.detailsCount = d.querySelectorAll('details.faq-item').length;
+    results.interactions.faqWithoutJs = Array.from(d.querySelectorAll('details.faq-item')).every((el) => !el.open);
+    results.interactions.hasInert = 'inert' in d.body;
+
+    document.getElementById('out').textContent = 'RESULT ' + JSON.stringify(results);
+  } catch (err) {
+    document.getElementById('out').textContent = 'REPORTERROR ' + (err && err.stack || err);
+  }
+})();
+</script>
+</body>
+</html>

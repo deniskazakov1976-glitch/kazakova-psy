@@ -1,265 +1,463 @@
 /**
- * Психоаналитический консультант (Евгения)
- * Скрипт интерактивности: Модальные окна, FAQ аккордеон, валидация формы.
- * Чистый Vanilla JS без внешних зависимостей.
+ * Евгения Казакова — психоаналитический консультант.
+ * Интерактивность: меню, модальное окно записи, форма заявки, cookie-согласие.
+ * Без зависимостей. Всё, что не критично для чтения страницы, вынесено за DOMContentLoaded.
  */
+(function () {
+  'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // --------------------------------------------------------------------------
-  // 1. Управление модальными окнами (Запись и Политика конфиденциальности)
-  // --------------------------------------------------------------------------
-  const bookingModal = document.getElementById('bookingModal');
-  const policyModal = document.getElementById('policyModal');
-  const openBookingBtns = document.querySelectorAll('.open-booking-modal');
-  const openPolicyBtns = document.querySelectorAll('.open-policy-modal');
-  const closeBookingBtn = document.getElementById('closeBookingModal');
-  const closePolicyBtn = document.getElementById('closePolicyModal');
-  const scrollToFormBtns = document.querySelectorAll('.scrollToFormBtn');
+  var CONFIG = window.ANALYTICS_CONFIG || {};
+  var CONSENT_KEY = 'kazakova_consent_v1';
+  var TELEGRAM = CONFIG.telegram || 'KazakovaEvgeniya';
 
-  function openModal(modal) {
-    if (!modal) return;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Фокус на кнопку закрытия для доступности
-    const closeBtn = modal.querySelector('.modal-close');
-    if (closeBtn) {
-      setTimeout(() => closeBtn.focus(), 50);
+  /* ---------------------------------------------------------------------
+   * Аналитика: подключается ТОЛЬКО после согласия на cookie.
+   * ------------------------------------------------------------------- */
+  var analyticsReady = false;
+
+  function initMetrika(id) {
+    if (!id || window.__ymLoaded) return;
+    window.__ymLoaded = true;
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) { return; }
+      }
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + id, 'ym');
+
+    window.ym(id, 'init', {
+      ssr: true,
+      webvisor: false,      // Вебвизор записывал бы ввод в поле контакта
+      clickmap: true,
+      ecommerce: 'dataLayer',
+      referrer: document.referrer,
+      url: location.href,
+      accurateTrackBounce: true,
+      trackLinks: true
+    });
+  }
+
+  function initGA4(id) {
+    if (!id || !id.startsWith('G-')) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', id);
+  }
+
+  function initVK(id) {
+    if (!id || !id.startsWith('VK-')) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://vk.com/js/api/openapi.js?169';
+    s.onload = function () {
+      if (window.VK && window.VK.Retargeting) {
+        window.VK.Retargeting.Init(id);
+        window.VK.Retargeting.Hit();
+      }
+    };
+    document.head.appendChild(s);
+  }
+
+  function startAnalytics() {
+    if (analyticsReady) return;
+    analyticsReady = true;
+    initMetrika(CONFIG.ymId);
+    initGA4(CONFIG.ga4Id);
+    initVK(CONFIG.vkPixelId);
+    if (CONFIG.debug) {
+      console.log('[Аналитика] Включена после согласия. Счётчик:', CONFIG.ymId || '—');
     }
   }
 
-  function closeModal(modal) {
-    if (!modal) return;
-    modal.classList.remove('active');
-    // Восстанавливаем скролл только если нет других открытых модалок
-    if (!document.querySelector('.modal-overlay.active')) {
-      document.body.style.overflow = '';
+  /** Цели: только обезличенные события. Значения формы сюда не попадают. */
+  function track(goal, params) {
+    if (!analyticsReady) {
+      if (CONFIG.debug) console.log('[Аналитика] Событие без согласия (не отправлено):', goal, params || {});
+      return;
+    }
+    try {
+      if (CONFIG.debug) console.log('[Аналитика] Цель:', goal, params || {});
+      if (CONFIG.ymId && typeof window.ym === 'function') window.ym(CONFIG.ymId, 'reachGoal', goal, params);
+      if (typeof window.gtag === 'function') window.gtag('event', goal, params || {});
+    } catch (err) {
+      if (CONFIG.debug) console.warn('[Аналитика] Ошибка отправки цели:', goal, err);
     }
   }
 
-  // Слушатели открытия модалки записи
-  openBookingBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal(bookingModal);
-    });
-  });
+  /* ---------------------------------------------------------------------
+   * Cookie-баннер
+   * ------------------------------------------------------------------- */
+  function initConsent() {
+    var banner = document.getElementById('cookieBanner');
+    var stored = null;
+    try { stored = localStorage.getItem(CONSENT_KEY); } catch (e) { stored = null; }
 
-  // Слушатели открытия модалки политики
-  openPolicyBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openModal(policyModal);
-    });
-  });
+    if (stored === 'all') {
+      startAnalytics();
+      return;
+    }
+    if (!banner) return;
 
-  // Кнопки закрытия
-  if (closeBookingBtn) {
-    closeBookingBtn.addEventListener('click', () => closeModal(bookingModal));
+    banner.hidden = false;
+    document.body.classList.add('cookie-open');
+
+    function decide(choice) {
+      try { localStorage.setItem(CONSENT_KEY, choice); } catch (e) { /* приватный режим */ }
+      banner.hidden = true;
+      document.body.classList.remove('cookie-open');
+      if (choice === 'all') startAnalytics();
+      track('cookie_consent', { value: choice });
+    }
+
+    var accept = document.getElementById('cookieAccept');
+    var decline = document.getElementById('cookieDecline');
+    if (accept) accept.addEventListener('click', function () { decide('all'); });
+    if (decline) decline.addEventListener('click', function () { decide('necessary'); });
   }
-  if (closePolicyBtn) {
-    closePolicyBtn.addEventListener('click', () => closeModal(policyModal));
-  }
 
-  // Закрытие по клику на фон (overlay)
-  [bookingModal, policyModal].forEach(modal => {
-    if (!modal) return;
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal(modal);
+  /* ---------------------------------------------------------------------
+   * Мобильное меню
+   * ------------------------------------------------------------------- */
+  function initNav() {
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('primaryNav');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      nav.classList.toggle('nav--open', open);
+      document.body.classList.toggle('nav-open', open);
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    nav.addEventListener('click', function (event) {
+      if (event.target.closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
       }
     });
-  });
 
-  // Закрытие по клавише Esc
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModal(bookingModal);
-      closeModal(policyModal);
-    }
-  });
-
-  // Переход к форме из модального окна записи
-  scrollToFormBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      closeModal(bookingModal);
-      const formElement = document.getElementById('contact');
-      if (formElement) {
-        formElement.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => {
-          const nameInput = document.getElementById('clientName');
-          if (nameInput) nameInput.focus();
-        }, 600);
-      }
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860 && toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
     });
-  });
+  }
 
-  // --------------------------------------------------------------------------
-  // 2. Доступный FAQ-аккордеон
-  // --------------------------------------------------------------------------
-  const faqButtons = document.querySelectorAll('.faq-button');
+  /* ---------------------------------------------------------------------
+   * Модальное окно записи: ловушка фокуса, возврат фокуса, inert на фоне
+   * ------------------------------------------------------------------- */
+  var FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-  faqButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const item = button.closest('.faq-item');
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+  function initModal() {
+    var modal = document.getElementById('bookingModal');
+    if (!modal) return;
+    var openers = document.querySelectorAll('.open-booking-modal');
+    var closeBtn = document.getElementById('closeBookingModal');
+    var lastFocused = null;
+    var background = null;
 
-      // Закрываем остальные вкладки (одиночный режим раскрытия)
-      document.querySelectorAll('.faq-item').forEach(otherItem => {
-        if (otherItem !== item) {
-          otherItem.classList.remove('active');
-          const otherBtn = otherItem.querySelector('.faq-button');
-          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+    function backgroundEls() {
+      return Array.prototype.filter.call(document.body.children, function (el) {
+        return el !== modal && el.tagName !== 'SCRIPT' && el.tagName !== 'LINK';
+      });
+    }
+
+    function open() {
+      lastFocused = document.activeElement;
+      background = backgroundEls().map(function (el) {
+        var prev = el.inert;
+        el.inert = true;
+        return { el: el, prev: prev };
+      });
+      // Баннер согласия не должен оказаться под inert-ом навсегда
+      modal.classList.add('active');
+      document.body.classList.add('modal-open');
+      // Фокус ставим синхронно на карточку: она существует всегда, даже пока
+      // идёт transition видимости. Переход к первому контролу сделает Tab.
+      var card = modal.querySelector('.modal-card');
+      if (card) card.focus();
+      track('booking_modal_open');
+    }
+
+    function close() {
+      modal.classList.remove('active');
+      document.body.classList.remove('modal-open');
+      if (background) {
+        background.forEach(function (item) { item.el.inert = item.prev || false; });
+        background = null;
+      }
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      lastFocused = null;
+    }
+
+    openers.forEach(function (btn) {
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        open();
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', close);
+
+    // «Перейти к форме заявки» внутри диалога
+    var toForm = modal.querySelector('.scrollToFormBtn');
+    if (toForm) {
+      toForm.addEventListener('click', function () {
+        close();
+        var target = document.getElementById('contact');
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var nameField = document.getElementById('clientName');
+        if (nameField) {
+          setTimeout(function () { nameField.focus({ preventScroll: true }); }, 400);
         }
       });
+    }
 
-      // Переключаем текущую
-      if (isExpanded) {
-        item.classList.remove('active');
-        button.setAttribute('aria-expanded', 'false');
-      } else {
-        item.classList.add('active');
-        button.setAttribute('aria-expanded', 'true');
-      }
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) close();
     });
-  });
 
-  // --------------------------------------------------------------------------
-  // 3. Обработка отправки формы записи (152-ФЗ compliant)
-  // --------------------------------------------------------------------------
-  const bookingForm = document.getElementById('mainBookingForm');
-  const formSuccess = document.getElementById('formSuccess');
-
-  if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const nameInput = document.getElementById('clientName');
-      const contactInput = document.getElementById('clientContact');
-      const topicSelect = document.getElementById('clientTopic');
-      const formatRadio = document.querySelector('input[name="format"]:checked');
-
-      // Простая валидация
-      if (!nameInput.value.trim() || !contactInput.value.trim()) {
-        alert('Пожалуйста, заполните обязательные поля: имя и контакт для связи.');
+    document.addEventListener('keydown', function (event) {
+      if (!modal.classList.contains('active')) return;
+      if (event.key === 'Escape') {
+        close();
         return;
       }
-
-      // Визуальный отклик отправки
-      const submitBtn = bookingForm.querySelector('button[type="submit"]');
-      const originalBtnText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Отправка...';
-
-      // Фиксация конверсии отправки формы в веб-аналитике
-      trackAnalyticsEvent('form_submit', {
-        topic: topicSelect ? topicSelect.value : 'not_selected',
-        format: formatRadio ? formatRadio.value : 'online'
+      if (event.key !== 'Tab') return;
+      var items = Array.prototype.filter.call(modal.querySelectorAll(FOCUSABLE), function (el) {
+        return el.offsetParent !== null;
       });
-
-      // Эмуляция защищенной отправки (в продакшене здесь отправка в Telegram-бот или на email)
-      setTimeout(() => {
-        submitBtn.style.display = 'none';
-        
-        // Скрываем поля формы и показываем сообщение об успехе
-        bookingForm.querySelectorAll('.form-group, .form-checkbox, .form-disclaimer').forEach(el => {
-          el.style.display = 'none';
-        });
-
-        if (formSuccess) {
-          formSuccess.style.display = 'block';
-        }
-
-        console.log('Данные заявки получены:', {
-          name: nameInput.value.trim(),
-          contact: contactInput.value.trim(),
-          topic: topicSelect ? topicSelect.value : '',
-          format: formatRadio ? formatRadio.value : 'online',
-          timestamp: new Date().toISOString()
-        });
-      }, 700);
+      if (!items.length) return;
+      var first = items[0];
+      var last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
   }
 
-  // --------------------------------------------------------------------------
-  // 4. Плавный скролл для якорных ссылок шапки
-  // --------------------------------------------------------------------------
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId.startsWith('#policy')) return;
-      
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+  /* ---------------------------------------------------------------------
+   * Форма заявки: реальная доставка
+   *   1. есть formEndpoint  -> POST JSON, успех только по response.ok
+   *   2. нет formEndpoint   -> открываем Telegram с готовым текстом
+   * ------------------------------------------------------------------- */
+  function initForm() {
+    var form = document.getElementById('mainBookingForm');
+    if (!form) return;
+
+    var nameInput = document.getElementById('clientName');
+    var contactInput = document.getElementById('clientContact');
+    var topicSelect = document.getElementById('clientTopic');
+    var consent = document.getElementById('clientConsent');
+    var submitBtn = document.getElementById('submitBtn');
+    var status = document.getElementById('formStatus');
+    var success = document.getElementById('formSuccess');
+    var consentError = document.getElementById('consentError');
+
+    var TOPIC_LABELS = {
+      relationships: 'отношения, расставание, семья',
+      anxiety: 'тревога, страх, истощение',
+      motherhood: 'материнство, беременность, репродуктивные вопросы',
+      patterns: 'повторяющиеся сценарии',
+      crisis: 'кризис смыслов, самооценка',
+      other: 'другое'
+    };
+
+    function setStatus(message, tone) {
+      if (!status) return;
+      status.textContent = message || '';
+      status.className = 'form-status' + (tone ? ' form-status--' + tone : '');
+    }
+
+    function setFieldError(input, hasError) {
+      if (!input) return;
+      input.classList.toggle('is-invalid', !!hasError);
+      input.setAttribute('aria-invalid', hasError ? 'true' : 'false');
+    }
+
+    function readForm() {
+      var formatInput = form.querySelector('input[name="format"]:checked');
+      return {
+        name: (nameInput && nameInput.value || '').trim(),
+        contact: (contactInput && contactInput.value || '').trim(),
+        topic: (topicSelect && topicSelect.value) || '',
+        format: formatInput ? formatInput.value : 'online'
+      };
+    }
+
+    function buildMessage(data) {
+      var formatText = data.format === 'offline' ? 'очно в Перми' : 'онлайн';
+      var lines = [
+        'Здравствуйте, Евгения Викторовна!',
+        'Меня зовут ' + data.name + '. Хочу записаться на установочную встречу (' + formatText + ', 45 минут).',
+        'Контакт для связи: ' + data.contact
+      ];
+      if (data.topic && TOPIC_LABELS[data.topic]) {
+        lines.push('Тема обращения: ' + TOPIC_LABELS[data.topic] + '.');
       }
-    });
-  });
+      lines.push('Спасибо!');
+      return lines.join('\n');
+    }
 
-  // --------------------------------------------------------------------------
-  // 5. Веб-аналитика и фиксация целей (Метрика, GA4, VK Pixel)
-  // --------------------------------------------------------------------------
-  function trackAnalyticsEvent(goalName, params = {}) {
-    const cfg = window.ANALYTICS_CONFIG || {};
-
-    // 1. Отладочный вывод в консоль браузера (F12 -> Console)
-    if (cfg.debug !== false) {
-      console.log(
-        '%c[Цель аналитики] ' + goalName,
-        'background: #2D5A43; color: #FFFFFF; font-weight: bold; padding: 3px 8px; border-radius: 4px;',
-        params
+    function showSuccess(mode) {
+      if (success) {
+        success.hidden = false;
+        success.focus();
+      }
+      form.classList.add('is-sent');
+      setStatus(
+        mode === 'telegram'
+          ? 'Открыл Telegram с готовым сообщением. Осталось нажать «Отправить» — и я отвечу.'
+          : 'Заявка доставлена.',
+        'success'
       );
+      track('form_submit', { method: mode });
     }
 
-    // 2. Яндекс.Метрика
-    try {
-      if (cfg.ymId && cfg.ymId !== 'XXXXXXXX' && typeof window.ym === 'function') {
-        window.ym(cfg.ymId, 'reachGoal', goalName, params);
-      }
-    } catch (err) {
-      console.warn('[Analytics] Ошибка отправки цели в Яндекс.Метрику:', err);
+    function showFailure(reason) {
+      if (!status) return;
+      status.className = 'form-status form-status--error';
+      status.textContent = reason + ' Напишите, пожалуйста, в Telegram: ';
+      var link = document.createElement('a');
+      link.href = 'https://t.me/' + TELEGRAM;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = '@' + TELEGRAM;
+      status.appendChild(link);
+      status.appendChild(document.createTextNode(' — это займёт полминуты.'));
     }
 
-    // 3. Google Analytics 4
-    try {
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', goalName, params);
+    function validate(data) {
+      var ok = true;
+      if (!data.name) { setFieldError(nameInput, true); ok = false; } else { setFieldError(nameInput, false); }
+      if (!data.contact) { setFieldError(contactInput, true); ok = false; } else { setFieldError(contactInput, false); }
+      if (consent && !consent.checked) {
+        if (consentError) consentError.hidden = false;
+        ok = false;
+      } else if (consentError) {
+        consentError.hidden = true;
       }
-    } catch (err) {
-      console.warn('[Analytics] Ошибка отправки цели в GA4:', err);
+      if (!ok) {
+        setStatus('Проверьте, пожалуйста, выделенные поля.', 'error');
+        var firstBad = form.querySelector('.is-invalid') || (consent && !consent.checked ? consent : null);
+        if (firstBad) firstBad.focus();
+      }
+      return ok;
     }
 
-    // 4. VK Реклама (VK Pixel)
-    try {
-      if (window.VK && window.VK.Retargeting && typeof window.VK.Retargeting.Event === 'function') {
-        window.VK.Retargeting.Event(goalName);
+    function sendToEndpoint(data) {
+      return fetch(CONFIG.formEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          contact: data.contact,
+          topic: data.topic,
+          format: data.format,
+          page: location.pathname,
+          sentAt: new Date().toISOString()
+        })
+      }).then(function (response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return true;
+      });
+    }
+
+    function openTelegram(data) {
+      var url = 'https://t.me/' + TELEGRAM + '?text=' + encodeURIComponent(buildMessage(data));
+      var win = window.open(url, '_blank', 'noopener');
+      if (!win) {
+        // Попап заблокирован — уводим в том же окне
+        window.location.href = url;
       }
-    } catch (err) {
-      console.warn('[Analytics] Ошибка отправки цели в VK Pixel:', err);
+      return true;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var data = readForm();
+      if (!validate(data)) return;
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправляю…';
+      }
+      setStatus('Отправляю заявку…');
+
+      var delivery = CONFIG.formEndpoint
+        ? sendToEndpoint(data).then(function () { return 'server'; })
+        : Promise.resolve().then(function () { return openTelegram(data) ? 'telegram' : 'none'; });
+
+      delivery
+        .then(function (mode) {
+          if (mode === 'none') throw new Error('Не удалось открыть Telegram');
+          showSuccess(mode);
+        })
+        .catch(function (error) {
+          if (CONFIG.debug) console.warn('[Форма] Ошибка доставки:', error);
+          showFailure('Не получилось отправить заявку автоматически.');
+        })
+        .then(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить заявку';
+          }
+        });
+    });
+
+    if (consent && consentError) {
+      consent.addEventListener('change', function () {
+        if (consent.checked) consentError.hidden = true;
+      });
     }
   }
 
-  // Слушатель кликов по всем элементам с атрибутом data-analytics-goal
-  document.addEventListener('click', (e) => {
-    const target = e.target.closest('[data-analytics-goal]');
-    if (!target) return;
+  /* ---------------------------------------------------------------------
+   * Цели на клики по ссылкам
+   * ------------------------------------------------------------------- */
+  function initTracking() {
+    document.addEventListener('click', function (event) {
+      var target = event.target.closest('[data-analytics-goal]');
+      if (!target) return;
+      track(target.getAttribute('data-analytics-goal'), {
+        location: target.getAttribute('data-analytics-location') || 'page'
+      });
+    });
+  }
 
-    const goal = target.getAttribute('data-analytics-goal');
-    const location = target.getAttribute('data-analytics-location') || 'page';
-
-    trackAnalyticsEvent(goal, { location: location });
+  /* ---------------------------------------------------------------------
+   * Инициализация
+   * ------------------------------------------------------------------- */
+  document.addEventListener('DOMContentLoaded', function () {
+    initConsent();
+    initNav();
+    initModal();
+    initForm();
+    initTracking();
   });
 
-  // Уведомление об успешной инициализации аналитики в консоли
-  if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.debug !== false) {
-    console.log(
-      '%c[Аналитика] Система отслеживания активна! Клики по кнопкам («Записаться», Telegram, WhatsApp) и отправка формы фиксируются.',
-      'background: #2D5A43; color: #EAF4EE; font-weight: bold; padding: 4px 10px; border-radius: 4px;'
-    );
-  }
-});
-
+  // Экспорт для автотестов (в обычной работе страницы не используется)
+  window.__kazakova = { track: track };
+})();

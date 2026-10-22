@@ -3,31 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Евгения Казакова — Психоаналитический терапевт | Пермь и Онлайн</title>
-  <meta name="description" content="Индивидуальные психоаналитические консультации в Перми и онлайн. Глубинная работа с повторяющимися сценариями, тревогой, кризисами и отношениями. Без шаблонных советов.">
-  <meta name="keywords" content="психоаналитический консультант, психоанализ Пермь, психотерапия онлайн, психолог Пермь, Евгения Казакова, глубинная терапия">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Евгения Казакова — Психоаналитический терапевт">
-  <meta property="og:description" content="Глубинная работа с причинами тревоги, кризисов и сложностей в отношениях. Конфиденциально, бережно, профессионально.">
+  <title>Психоаналитический консультант в Перми и онлайн — Евгения Казакова</title>
+  <meta name="description" content="Психоаналитическая консультация: глубинная работа с тревогой, повторяющимися сценариями и кризисами. Пермь и онлайн, 45 минут, 5 000 ₽. 22 года практики.">
+  <link rel="canonical" href="https://deniskazakov1976-glitch.github.io/kazakova-psy/">
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Евгения Казакова — психоаналитический консультант">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Психоаналитический консультант в Перми и онлайн — Евгения Казакова">
+  <meta property="og:description" content="Глубинная работа с причинами тревоги, кризисов и сложностей в отношениях. Конфиденциально, 22 года практики.">
+  <meta property="og:url" content="https://deniskazakov1976-glitch.github.io/kazakova-psy/">
+  <meta property="og:image" content="https://deniskazakov1976-glitch.github.io/kazakova-psy/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Евгения Викторовна Казакова, психоаналитический консультант">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Психоаналитический консультант в Перми и онлайн">
+  <meta name="twitter:description" content="Глубинная работа с причинами тревоги, кризисов и сложностей в отношениях. 22 года практики.">
+  <meta name="twitter:image" content="https://deniskazakov1976-glitch.github.io/kazakova-psy/images/og-image.jpg">
+  <meta name="theme-color" content="#2D4739">
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%232D5A43%22/><text x=%2216%22 y=%2221%22 font-size=%2214%22 font-family=%22Georgia,serif%22 font-weight=%22bold%22 fill=%22%23FAF8F5%22 text-anchor=%22middle%22>Е</text></svg>">
-  
-  <!-- Подключение шрифта Cormorant Garamond для благородных заголовков -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- LCP-изображение: предзагрузка с учётом srcset -->
+  <link rel="preload" as="image" fetchpriority="high"
+        imagesrcset="images/hero-380.avif 380w, images/hero-760.avif 760w"
+        imagesizes="(max-width: 960px) 92vw, 380px" type="image/avif">
+
+  <!-- Подключение шрифта Cormorant Garamond (только начертание 600 — используется одно) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+
   <!-- Стили -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 
   <!-- ======================================================================
        Веб-аналитика и рекламные пиксели (Конфигурация)
        ====================================================================== -->
   <script>
     window.ANALYTICS_CONFIG = {
+      // Приёмник заявок. Пусто — форма работает без сервера:
+      // собирает сообщение и открывает Telegram с готовым текстом.
+      // Укажите URL (Formspree / свой backend) — форма начнёт уходить POST-запросом.
+      formEndpoint: '',
+
+      // Куда ведёт запасной канал доставки заявки
+      telegram: 'KazakovaEvgeniya',
+      whatsapp: '79026366133',
+
       // 1. Яндекс.Метрика: номер счётчика
       ymId: '112744330',
 
@@ -37,70 +65,100 @@
       // 3. Пиксель VK Рекламы (например, 'VK-RTRG-123456-ABCDE')
       vkPixelId: '',
 
-      // Режим отладки: выводит все события целей в консоль браузера (F12 -> Console)
-      debug: true
+      // Режим отладки: выводит события целей в консоль браузера (F12 -> Console)
+      debug: false
     };
   </script>
 
-  <!-- Yandex.Metrika counter -->
-  <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112744330', 'ym');
-
-    ym(112744330, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/112744330" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <!-- /Yandex.Metrika counter -->
-
-  <!-- Google tag (gtag.js) - Google Analytics 4 (активируется при заполнении ga4Id) -->
-  <script>
-    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.ga4Id && window.ANALYTICS_CONFIG.ga4Id.startsWith('G-')) {
-      var gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.ANALYTICS_CONFIG.ga4Id;
-      document.head.appendChild(gaScript);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', window.ANALYTICS_CONFIG.ga4Id);
-    }
-  </script>
-
-  <!-- Пиксель VK Реклама (активируется при заполнении vkPixelId) -->
-  <script>
-    if (window.ANALYTICS_CONFIG && window.ANALYTICS_CONFIG.vkPixelId && window.ANALYTICS_CONFIG.vkPixelId.startsWith('VK-')) {
-      var vkInitScript = document.createElement('script');
-      vkInitScript.type = 'text/javascript';
-      vkInitScript.async = true;
-      vkInitScript.src = 'https://vk.com/js/api/openapi.js?169';
-      vkInitScript.onload = function() {
-        if (window.VK && window.VK.Retargeting) {
-          VK.Retargeting.Init(window.ANALYTICS_CONFIG.vkPixelId);
-          VK.Retargeting.Hit();
-        }
-      };
-      document.head.appendChild(vkInitScript);
-    }
+  <!-- Яндекс.Метрика, GA4 и VK Pixel подключаются из app.js ТОЛЬКО после
+       согласия на cookie (152-ФЗ, ст. 6 ч. 1 п. 1). Вебвизор отключён:
+       он записывал бы ввод в поле контакта. Никаких запросов к аналитике
+       до нажатия «Принять» не происходит. -->
+  <!-- Структурированные данные: организация, человек, FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://deniskazakov1976-glitch.github.io/kazakova-psy/#business",
+        "name": "Психоаналитический консультант Евгения Казакова",
+        "description": "Психоаналитическая консультация: глубинная работа с тревогой, повторяющимися сценариями и кризисами. Пермь и онлайн.",
+        "url": "https://deniskazakov1976-glitch.github.io/kazakova-psy/",
+        "image": "https://deniskazakov1976-glitch.github.io/kazakova-psy/images/og-image.jpg",
+        "telephone": "+7-902-636-61-33",
+        "priceRange": "5000 ₽",
+        "areaServed": "RU",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Пермь",
+          "addressCountry": "RU"
+        },
+        "founder": { "@id": "https://deniskazakov1976-glitch.github.io/kazakova-psy/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://deniskazakov1976-glitch.github.io/kazakova-psy/#person",
+        "name": "Евгения Викторовна Казакова",
+        "jobTitle": "Психоаналитический консультант",
+        "description": "Психоаналитический консультант, 22 года частной практики. Очно в Перми, онлайн.",
+        "worksFor": { "@id": "https://deniskazakov1976-glitch.github.io/kazakova-psy/#business" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://deniskazakov1976-glitch.github.io/kazakova-psy/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Нужно ли как-то специально готовиться к первой сессии?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Специальной подготовки не требуется. Достаточно прийти в согласованное время и начать с того, что занимает ваши мысли больше всего."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Сколько времени длится психоаналитическая терапия?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Для точечной работы с актуальным кризисом часто достаточно 10–20 сессий. Глубинные изменения требуют от 6–12 месяцев регулярной работы. Длительность всегда обсуждается совместно."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Можно ли работать онлайн так же глубоко, как очно?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Онлайн-формат не менее содержателен при стабильном интернете и приватности: вы находитесь одни в закрытой комнате. Для некоторых тем очная встреча предпочтительнее — это обсуждается на первой встрече."
+            }
+          }
+        ]
+      }
+    ]
+  }
   </script>
 </head>
 <body>
+
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
 
   <!-- ========================================================================
        Шапка сайта (Header)
        ======================================================================== -->
   <header class="header">
     <div class="container header-inner">
-      <a href="#" class="header-brand" aria-label="Главная страница">
+      <a href="#hero" class="header-brand" aria-label="Евгения Викторовна Казакова — в начало страницы">
         <span class="brand-name">Евгения Викторовна Казакова</span>
-        <span class="brand-title">Психоаналитический терапевт</span>
+        <span class="brand-title">Психоаналитический консультант</span>
       </a>
 
-      <nav class="nav" aria-label="Основная навигация">
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Открыть меню">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="primaryNav" aria-label="Основная навигация">
         <ul class="nav-links">
           <li><a href="#situations" class="nav-link">Кому подойдёт</a></li>
           <li><a href="#method" class="nav-link">О методе</a></li>
@@ -113,7 +171,7 @@
       </nav>
 
       <div class="header-cta">
-        <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="messenger-link telegram" title="Написать в Telegram" data-analytics-goal="telegram_click" data-analytics-location="header">
+        <a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D1%83%2045%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%2C%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F%20%D0%BD%D0%B0%20%D1%8D%D1%82%D0%BE%D0%B9%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5." target="_blank" rel="noopener" class="messenger-link telegram" title="Написать в Telegram" data-analytics-goal="telegram_click" data-analytics-location="header">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
           <span>Telegram</span>
         </a>
@@ -124,32 +182,34 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <!-- ======================================================================
          Блок 1: Hero (Первый экран)
          ====================================================================== -->
     <section class="hero" id="hero">
       <div class="container hero-grid">
         <div class="hero-content">
+          <p class="hero-kicker">Психоаналитический консультант · Пермь и онлайн</p>
           <h1 class="hero-title">
-            Когда привычные сценарии больше не работают
+            Психоаналитическая консультация: когда привычные сценарии больше не работают
           </h1>
           <p class="hero-subtitle lead-text">
-            Глубинная работа с истинными причинами тревоги, кризисов и сложностей в отношениях. Без шаблонных советов, быстрых рецептов и давления на ваш темп.
+            <span class="lead-long">Глубинная работа с истинными причинами тревоги, кризисов и сложностей в отношениях. Без шаблонных советов, быстрых рецептов и давления на ваш темп.</span>
+            <span class="lead-short">Глубинная работа с причинами тревоги, кризисов и сложностей в отношениях — без шаблонных советов и давления на ваш темп.</span>
           </p>
 
           <div class="hero-specs">
             <div class="spec-cell">
               <span class="spec-value">22 года</span>
-              <span class="spec-label">непрерывной клинической практики</span>
+              <span class="spec-label">непрерывной частной практики</span>
             </div>
             <div class="spec-cell">
               <span class="spec-value">Пермь и Онлайн</span>
               <span class="spec-label">очно в центре города / Zoom, Телемост</span>
             </div>
             <div class="spec-cell">
-              <span class="spec-value">от 5 000 ₽</span>
-              <span class="spec-label">индивидуальная сессия 45 минут</span>
+              <span class="spec-value">5 000 ₽</span>
+              <span class="spec-label">сессия 45 минут · конфиденциально</span>
             </div>
           </div>
 
@@ -159,12 +219,15 @@
                 Записаться на установочную встречу
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
+              <p class="hero-cta-note">
+                Установочная встреча — это знакомство: 45 минут, 5 000 ₽. Разбираем ваш запрос и решаем, подходим ли мы друг другу. Оставаться в терапии после неё не обязательно.
+              </p>
             </div>
 
             <div class="hero-messengers">
               <span class="messengers-caption">Или задайте быстрый организационный вопрос лично:</span>
               <div class="messenger-buttons-row">
-                <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="messenger-link telegram" data-analytics-goal="telegram_click" data-analytics-location="hero">
+                <a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D1%83%2045%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%2C%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F%20%D0%BD%D0%B0%20%D1%8D%D1%82%D0%BE%D0%B9%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5." target="_blank" rel="noopener" class="messenger-link telegram" data-analytics-goal="telegram_click" data-analytics-location="hero">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
                   <span>Telegram</span>
                 </a>
@@ -180,10 +243,14 @@
         <div class="hero-visual">
           <div class="portrait-wrapper">
             <div class="portrait-frame">
-              <img src="images/evgeniya-kazakova.jpg" alt="Евгения Викторовна Казакова — Психоаналитический терапевт" class="portrait-img" width="380" height="475" loading="eager">
+              <picture>
+                <source type="image/avif" srcset="images/hero-380.avif 380w, images/hero-760.avif 760w" sizes="(max-width: 960px) 92vw, 380px">
+                <source type="image/webp" srcset="images/hero-380.webp 380w, images/hero-760.webp 760w" sizes="(max-width: 960px) 92vw, 380px">
+                <img src="images/hero-760.jpg" alt="Евгения Викторовна Казакова — психоаналитический консультант" class="portrait-img" width="760" height="1018" loading="eager" fetchpriority="high" decoding="async">
+              </picture>
               <div class="portrait-badge">
                 <span class="badge-name">Евгения Викторовна Казакова</span>
-                <span class="badge-status">Психоаналитический терапевт · Стаж 22 года</span>
+                <span class="badge-status">Психоаналитический консультант · 22 года практики</span>
               </div>
             </div>
           </div>
@@ -231,16 +298,16 @@
           </div>
 
           <div class="situation-card">
-            <h3 class="card-title">ПРД и кризис материнства</h3>
+            <h3 class="card-title">После родов я себя не узнаю</h3>
             <p>
-              Послеродовая депрессия, хроническая усталость, истощение, невыносимые убеждения и мысли: «я плохая мать», «я ненавижу своего ребенка». Бережная работа с виной и стыдом без осуждения.
+              Истощение, хроническая усталость, невыносимые мысли «я плохая мать», «я ненавижу своего ребенка». Бережная работа с виной и стыдом без осуждения. Послеродовая депрессия — медицинский диагноз: я работаю в дополнение к наблюдению врача, а не вместо него.
             </p>
           </div>
 
           <div class="situation-card">
             <h3 class="card-title">Перинатальный период и родительство</h3>
             <p>
-              Подготовка и сопровождение беременности, подготовка к родам, преодоление страха родительства, психологические причины невозможности иметь детей.
+              Подготовка и сопровождение беременности, подготовка к родам, страх родительства, переживание лечения бесплодия, ЭКО и потерь беременности. Я не лечу бесплодие и не заменяю репродуктолога — работаю с тем, как вы это переживаете.
             </p>
           </div>
         </div>
@@ -261,16 +328,16 @@
          ====================================================================== -->
     <section id="method">
       <div class="container">
-        <h2>Почему психоаналитическая терапия дает долгосрочный результат</h2>
+        <h2>Как устроена психоаналитическая работа</h2>
         <p class="section-intro">
-          В отличие от поверхностных методик, направленных лишь на подавление симптома, мы исследуем то, что этот симптом порождает.
+          В отличие от методов, сосредоточенных на управлении симптомом, мы смотрим на то, что этот симптом поддерживает.
         </p>
 
         <div class="method-grid">
           <div class="method-item">
             <h3>Работа с корнями, а не фасадом</h3>
             <p>
-              Тревога или прокрастинация — это лишь верхушка айсберга, сигналы психики о внутреннем конфликте. Мы находим и распутываем неосознанные корни проблемы, после чего симптом уходит сам — ему больше незачем существовать.
+              Тревога или прокрастинация — это верхушка айсберга, сигналы психики о внутреннем конфликте. Мы находим и распутываем неосознанные корни: тогда симптом часто теряет опору — хотя, разумеется, не по расписанию и не по заказу.
             </p>
           </div>
 
@@ -284,7 +351,7 @@
           <div class="method-item">
             <h3>Устойчивые внутренние опоры</h3>
             <p>
-              Результат психоанализа не улетучивается через месяц после завершения работы. Понимание законов собственной психики и проживание старых травм становятся вашим личным внутренним фундаментом на всю жизнь.
+              Понимание собственных механизмов и проживание старых травм остаются с вами — на это можно опираться и после завершения работы. Гарантировать пожизненный результат не может никто: это было бы обещанием, а не терапией.
             </p>
           </div>
         </div>
@@ -300,7 +367,7 @@
           <div class="about-bio">
             <h2>Евгения Викторовна Казакова — ваш проводник в исследовании внутреннего мира</h2>
             <p>
-              Я убеждена, что у каждого человека есть достаточный внутренний потенциал для исцеления, но в одиночку встретиться со сложными чувствами бывает невыносимо трудно. Моя роль — быть устойчивым, бережным и квалифицированным спутником на этом пути.
+              Я убеждена, что у каждого человека есть достаточный внутренний потенциал для изменений, но в одиночку встретиться со сложными чувствами бывает невыносимо трудно. Моя роль — быть устойчивым, бережным и квалифицированным спутником на этом пути.
             </p>
             <p>
               В работе я опираюсь на психоаналитическую традицию и обладаю огромным практическим опытом в интегративном подходе. Синтез глубинной психоаналитической оптики с современными интегративными методиками позволяет чутко калибровать терапию под задачу и темп каждого клиента — от глубоких травм и повторяющихся сценариев до кризисов материнства, ПРД и репродуктивных трудностей.
@@ -308,13 +375,13 @@
 
             <div class="supervision-box">
               <p>
-                <strong>Золотой стандарт профессии:</strong> регулярная личная терапия (более 500 часов) и регулярные индивидуальные супервизии у сертифицированных тренинговых аналитиков. Это гарантия того, что в процессе работы я не переношу свои сложности на ваш процесс.
+                <strong>Золотой стандарт профессии:</strong> регулярная личная терапия (более 500 часов) и регулярные индивидуальные супервизии у сертифицированных тренинговых аналитиков. Это профессиональная гигиена — условие, при котором специалист замечает собственные слепые зоны. Она не обещает гарантированного результата.
               </p>
             </div>
           </div>
 
           <div class="about-credentials">
-            <h3 style="font-size: 1.4rem; margin-bottom: 16px;">Проверяемая квалификация</h3>
+            <h3 style="font-size: 1.4rem; margin-bottom: 16px;">Профессиональный путь и подготовка</h3>
             <ul class="credentials-list">
               <li class="credential-item">
                 <span class="check-icon" aria-hidden="true">
@@ -374,7 +441,7 @@
                   <strong>Диссертационное исследование</strong>
                   <span>Тема: «Послеродовая депрессия и материнская идентичность». Научная работа на стыке перинатальной психологии и психоанализа.</span>
                   <span class="dissertation-cta">
-                    Если вы мама малыша до 1&nbsp;года — вы можете <a href="https://docs.google.com/forms/d/1Ur2hMmGZqphJd5PXDZ7doViF7myhaJw-jZm6f-TBpHc/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" data-analytics-goal="dissertation_survey_click" data-analytics-location="about_credentials">пройти анонимный опрос</a> и по желанию получить обратную связь.
+                    Если вы мама малыша до 1&nbsp;года — вы можете <a href="https://docs.google.com/forms/d/1Ur2hMmGZqphJd5PXDZ7doViF7myhaJw-jZm6f-TBpHc/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" data-analytics-goal="dissertation_survey_click" data-analytics-location="about_credentials">пройти опрос</a>. Участие добровольное: контакты вы указываете, только если хотите обратную связь, иначе ответы анонимны. Опрос проводится на внешней платформе, его условия — на странице формы.
                   </span>
                 </div>
               </li>
@@ -403,7 +470,7 @@
                 Феномен навязчивого повторения: как детская потребность исправить прошлое заставляет взрослого человека вновь и вновь воссоздавать травматичный сценарий с новыми людьми.
               </p>
             </div>
-            <div class="essay-author">Время чтения: 4 мин · Евгения Казакова</div>
+            <div class="essay-author">Евгения Казакова · тезис</div>
           </article>
 
           <article class="essay-card">
@@ -414,7 +481,7 @@
                 Когда все медицинские чекапы пройдены, а сердцебиение и ком в горле остаются. Почему попытки «успокоиться усилием воли» лишь усиливают панику, и что с этим делать.
               </p>
             </div>
-            <div class="essay-author">Время чтения: 5 мин · Евгения Казакова</div>
+            <div class="essay-author">Евгения Казакова · тезис</div>
           </article>
 
           <article class="essay-card">
@@ -422,10 +489,10 @@
               <span class="essay-category">Сеттинг</span>
               <h3 class="essay-title">Что происходит на установочной сессии</h3>
               <p class="essay-preview">
-                Честный разбор первых 50 минут: почему здесь не нужно «готовиться с конспектом», как специалист слушает бессознательные маркеры и почему терапия — это совместное исследование.
+                Честный разбор первых 45 минут: почему здесь не нужно «готовиться с конспектом», как специалист слушает бессознательные маркеры и почему терапия — это совместное исследование.
               </p>
             </div>
-            <div class="essay-author">Время чтения: 3 мин · Евгения Казакова</div>
+            <div class="essay-author">Евгения Казакова · тезис</div>
           </article>
         </div>
       </div>
@@ -556,7 +623,7 @@
               Первая (установочная) сессия
             </h3>
             <p>
-              Первая встреча — диагностическая. Она не обязывает вас оставаться в долгосрочной терапии на годы.
+              Первая встреча — ознакомительная. Она не обязывает вас оставаться в долгосрочной терапии на годы.
             </p>
             <ul class="setting-features">
               <li>
@@ -597,21 +664,28 @@
             <div class="rule-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               <div>
-                <strong>Правило 24 часов:</strong> Отмена или перенос сессии возможны не позднее, чем за 24 часа до назначенного времени. При более поздней отмене пропущенная сессия оплачивается.
+                <strong>Что входит:</strong> 45 минут; разбор вашего запроса; честный ответ, подходит ли вам психоаналитический метод; если нет — рекомендация профильного коллеги.
+              </div>
+            </div>
+
+            <div class="rule-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div>
+                <strong>Отмена и перенос:</strong> бесплатно — не позднее чем за 24 часа. При более поздней отмене удерживается 30% стоимости встречи, остаток возвращается или зачитывается в счёт следующей. Возврат — в течение 10 дней.
               </div>
             </div>
 
             <div class="rule-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <div>
-                <strong>Абсолютная конфиденциальность:</strong> Ни содержание разговоров, ни сам факт вашего обращения не раскрываются третьим лицам.
+                <strong>Конфиденциальность:</strong> содержание разговоров и сам факт обращения не раскрываются третьим лицам. Исключения — случаи, предусмотренные законом, и угроза жизни; супервизия проходит без имён и узнаваемых деталей. Подробно обсуждаем на первой встрече.
               </div>
             </div>
 
             <div class="rule-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
               <div>
-                <strong>Оплата:</strong> Безналичный расчёт (официальная оплата с выдачей чека самозанятого).
+                <strong>Оплата:</strong> безналичный расчёт с выдачей чека самозанятого. Оплата — в день встречи.
               </div>
             </div>
           </div>
@@ -619,6 +693,10 @@
           <button type="button" class="btn btn-primary open-booking-modal" data-analytics-goal="booking_click" data-analytics-location="conditions">
             Записаться на сессию
           </button>
+
+          <p class="crisis-note">
+            <strong>Если сейчас остро:</strong> я не оказываю экстренную помощь и не отвечаю ночью. При мыслях о вреде себе или ребёнку звоните <a href="tel:112">112</a> (единый номер экстренных служб) или на круглосуточную линию психологической помощи МЧС России <a href="tel:+74959895050">8 (495) 989-50-50</a>. Пожалуйста, не ждите ответа в мессенджере.
+          </p>
         </div>
       </div>
     </section>
@@ -636,14 +714,14 @@
         <div class="contact-layout">
           <!-- Каналы прямого контакта -->
           <div class="contact-channels">
-            <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="channel-card" data-analytics-goal="telegram_click" data-analytics-location="contacts">
+            <a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D1%83%2045%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%2C%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F%20%D0%BD%D0%B0%20%D1%8D%D1%82%D0%BE%D0%B9%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5." target="_blank" rel="noopener" class="channel-card" data-analytics-goal="telegram_click" data-analytics-location="contacts">
               <div class="channel-info">
                 <div class="channel-icon tg" aria-hidden="true">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
                 </div>
                 <div class="channel-text">
                   <strong>Написать в Telegram</strong>
-                  <span>Ответ обычно в течение нескольких часов</span>
+                  <span>Отвечаю в рабочие дни, 10:00–19:00 (Пермь)</span>
                 </div>
               </div>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -670,32 +748,34 @@
 
           <!-- Форма записи (Строго 152-ФЗ compliant: без сбора диагнозов!) -->
           <div class="booking-form-wrapper">
-            <form class="booking-form" id="mainBookingForm">
+            <form class="booking-form" id="mainBookingForm" method="post" action="" novalidate>
               <div class="form-group">
-                <label for="clientName" class="form-label">Ваше имя <span class="req">*</span></label>
-                <input type="text" id="clientName" name="name" class="form-control" placeholder="Как к вам обращаться" required>
+                <label for="clientName" class="form-label">Ваше имя <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="clientName" name="name" class="form-control" placeholder="Как к вам обращаться" autocomplete="name" required aria-required="true">
               </div>
 
               <div class="form-group">
-                <label for="clientContact" class="form-label">Контакт для связи (Телефон / Telegram / WhatsApp) <span class="req">*</span></label>
-                <input type="text" id="clientContact" name="contact" class="form-control" placeholder="+7 (___) ___-__-__ или @username" required>
+                <label for="clientContact" class="form-label">Контакт для связи <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="clientContact" name="contact" class="form-control" placeholder="+7 (___) ___-__-__ или @username" autocomplete="tel" inputmode="tel" required aria-required="true">
+                <p class="form-hint">Телефон, @username в Telegram или номер WhatsApp — как вам удобнее.</p>
               </div>
 
               <div class="form-group">
-                <label for="clientTopic" class="form-label">Тема обращения (опционально)</label>
+                <label for="clientTopic" class="form-label">Тема обращения <span class="form-optional">(необязательно)</span></label>
                 <select id="clientTopic" name="topic" class="form-control">
-                  <option value="">Выберите категорию вопроса...</option>
-                  <option value="relationships">Сложности в отношениях / расставание</option>
-                  <option value="anxiety">Тревога, стресс, страх перед будущим</option>
-                  <option value="perinatal">ПРД, материнство, беременность, репродуктивные вопросы</option>
-                  <option value="patterns">Повторяющиеся сценарии в жизни</option>
+                  <option value="">Не хочу указывать — обсудим на встрече</option>
+                  <option value="relationships">Отношения, расставание, семья</option>
+                  <option value="anxiety">Тревога, страх, истощение</option>
+                  <option value="motherhood">Материнство, беременность, репродуктивные вопросы</option>
+                  <option value="patterns">Повторяющиеся сценарии</option>
                   <option value="crisis">Кризис смыслов, самооценка</option>
-                  <option value="other">Другой вопрос</option>
+                  <option value="other">Другое</option>
                 </select>
+                <p class="form-hint">Пожалуйста, не указывайте диагнозы и подробности о здоровье — для записи это не нужно.</p>
               </div>
 
-              <div class="form-group">
-                <label class="form-label">Предпочтительный формат встречи</label>
+              <fieldset class="form-group form-fieldset">
+                <legend class="form-label">Предпочтительный формат встречи</legend>
                 <div class="form-radio-group">
                   <label class="radio-label">
                     <input type="radio" name="format" value="online" checked>
@@ -706,27 +786,32 @@
                     <span>Очно в кабинете (Пермь)</span>
                   </label>
                 </div>
-              </div>
+              </fieldset>
 
               <label class="form-checkbox">
-                <input type="checkbox" required>
-                <span>Я согласен(на) на обработку персональных данных в соответствии с <a href="#policy" class="open-policy-modal">Политикой конфиденциальности</a>. <span class="req">*</span></span>
+                <input type="checkbox" id="clientConsent" name="consent" value="1" required aria-required="true">
+                <span>Я даю согласие на обработку моих персональных данных (имя, контакт, формат встречи) оператору — Казаковой Евгении Викторовне — для согласования встречи; хранение — 6 месяцев; согласие можно отозвать письмом на <a href="mailto:info@kazakova-psy.ru">info@kazakova-psy.ru</a>. Условия — в <a href="privacy.html">Политике обработки персональных данных</a>. <span class="req" aria-hidden="true">*</span></span>
               </label>
 
-              <button type="submit" class="btn btn-primary btn-block">
+              <p class="form-error" id="consentError" role="alert" hidden>Отметьте согласие на обработку данных — без него отправить заявку нельзя.</p>
+
+              <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
                 Отправить заявку
               </button>
 
               <p class="form-disclaimer">
-                Данные передаются по защищённому каналу (SSL) и не передаются третьим лицам.
+                Заявка уходит напрямую специалисту: защищённым запросом или готовым сообщением в Telegram. Переписка носит организационный характер и не является психотерапией.
               </p>
 
-              <div class="success-message" id="formSuccess">
+              <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+              <div class="success-message" id="formSuccess" hidden tabindex="-1">
                 <div class="success-icon" aria-hidden="true">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <h4 style="margin-bottom: 8px;">Заявка успешно отправлена!</h4>
-                <p style="font-size: 0.95rem; margin: 0;">Спасибо. Я свяжусь с вами в течение нескольких часов для согласования удобного времени.</p>
+                <h4 style="margin-bottom: 8px;">Заявка отправлена</h4>
+                <p style="font-size: 0.95rem; margin: 0 0 12px;">Отвечу в рабочие дни, 10:00–19:00 (Пермь), обычно в течение рабочего дня.</p>
+                <p style="font-size: 0.95rem; margin: 0;">Если передумаете — просто не отвечайте. Объяснять ничего не нужно.</p>
               </div>
             </form>
           </div>
@@ -745,65 +830,65 @@
         </p>
 
         <div class="faq-list">
-          <div class="faq-item">
-            <button type="button" class="faq-button" aria-expanded="false">
+          <details class="faq-item">
+            <summary class="faq-button">
               <span>Нужно ли как-то специально готовиться к первой сессии?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
+            </summary>
             <div class="faq-content">
               <p>
                 Специальной подготовки не требуется. Не нужно писать тезисы или «упаковывать» проблему в красивую речь. Достаточно просто прийти в согласованное время. Вы можете начать рассказ с того, что сейчас занимает ваши мысли больше всего, или даже со слов «я не знаю, с чего начать» — это абсолютно нормально.
               </p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <button type="button" class="faq-button" aria-expanded="false">
+          <details class="faq-item">
+            <summary class="faq-button">
               <span>Правда ли, что в психоанализе мы будем говорить только о детстве?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
+            </summary>
             <div class="faq-content">
               <p>
                 Нет, это миф. Мы всегда отталкиваемся от вашей сегодняшней реальной жизни: текущих конфликтов, чувств, планов и переживаний. К прошлому мы обращаемся ровно в той мере, в какой его невидимые отпечатки влияют на ваше «сейчас».
               </p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <button type="button" class="faq-button" aria-expanded="false">
+          <details class="faq-item">
+            <summary class="faq-button">
               <span>Насколько эффективны онлайн-консультации по сравнению с очными?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
+            </summary>
             <div class="faq-content">
               <p>
-                Современные международные исследования подтверждают сопоставимую терапевтическую глубину онлайн-формата при соблюдении двух условий: наличие стабильного интернета и полная приватность (вы находитесь одни в закрытой комнате, где никто не может вас подслушать).
+                Онлайн-формат не менее содержателен, если есть стабильный интернет и приватность: вы находитесь одни в закрытой комнате, где никто не может вас подслушать. Психоаналитическая работа с онлайн-сеттингом давно стала нормой практики, хотя для некоторых тем очная встреча всё же предпочтительнее — об этом честно скажу на первой встрече.
               </p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <button type="button" class="faq-button" aria-expanded="false">
+          <details class="faq-item">
+            <summary class="faq-button">
               <span>Обязан(а) ли я сразу рассказывать всё самое сокровенное?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
+            </summary>
             <div class="faq-content">
               <p>
                 Ни в коем случае. Доверие — это процесс, который созревает постепенно. Вы делитесь только тем, к чему готовы в данный момент. Психоаналитик не «выпытывает» тайны и никогда не торопит.
               </p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <button type="button" class="faq-button" aria-expanded="false">
+          <details class="faq-item">
+            <summary class="faq-button">
               <span>Сколько времени длится психоаналитическая терапия?</span>
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
+            </summary>
             <div class="faq-content">
               <p>
                 Для точечной проработки актуального кризиса может быть достаточно 10–20 сессий. Глубинные личностные изменения (перестройка характера, избавление от многолетних сценариев) требуют от 6–12 месяцев регулярной работы. Длительность и окончание работы всегда обсуждаются совместно с клиентом.
               </p>
             </div>
-          </div>
+          </details>
         </div>
       </div>
     </section>
@@ -826,7 +911,7 @@
           <h4 class="footer-heading">Навигация</h4>
           <ul class="footer-links">
             <li><a href="#situations" class="footer-link">Кому подойдёт</a></li>
-            <li><a href="#about" class="footer-link">Квалификация</a></li>
+            <li><a href="#about" class="footer-link">Подготовка</a></li>
             <li><a href="#essays" class="footer-link">Статьи и мысли</a></li>
             <li><a href="#conditions" class="footer-link">Условия и стоимость</a></li>
           </ul>
@@ -835,21 +920,29 @@
         <div>
           <h4 class="footer-heading">Контакты</h4>
           <ul class="footer-links">
-            <li><a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="footer-link" data-analytics-goal="telegram_click" data-analytics-location="footer">Telegram: @KazakovaEvgeniya</a></li>
+            <li><a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D1%83%2045%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%2C%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F%20%D0%BD%D0%B0%20%D1%8D%D1%82%D0%BE%D0%B9%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5." target="_blank" rel="noopener" class="footer-link" data-analytics-goal="telegram_click" data-analytics-location="footer">Telegram: @KazakovaEvgeniya</a></li>
             <li><a href="https://wa.me/79026366133" target="_blank" rel="noopener" class="footer-link" data-analytics-goal="whatsapp_click" data-analytics-location="footer">WhatsApp: +7 (902) 636-61-33</a></li>
-            <li><span class="footer-link" style="color: #727C82;">Очный приём: г. Пермь</span></li>
+            <li><a href="mailto:info@kazakova-psy.ru" class="footer-link">info@kazakova-psy.ru</a></li>
+            <li><span class="footer-link footer-link--static">Очный приём: г. Пермь</span></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-disclaimer-box">
-        <strong>Юридический дисклеймер:</strong> Консультации психоаналитического консультанта не являются медицинской услугой, не предполагают медикаментозного назначения и не заменяют специализированную помощь врача-психиатра или врача-психотерапевта. При наличии клинических симптомов тяжелой эндогенной депрессии или расстройств психотического спектра рекомендуется обращение в медицинские учреждения.
+        <strong>Юридический дисклеймер:</strong> Консультации психоаналитического консультанта не являются медицинской услугой, не предполагают медикаментозного назначения и не заменяют специализированную помощь врача-психиатра или врача-психотерапевта. При наличии клинических симптомов тяжёлой эндогенной депрессии или расстройств психотического спектра необходимо обратиться в медицинское учреждение.
+      </div>
+
+      <div class="footer-legal">
+        <p><strong>Оператор персональных данных:</strong> Казакова Евгения Викторовна, плательщик налога на профессиональный доход (самозанятая). ИНН: <span class="placeholder">указывается владельцем перед публикацией</span>.</p>
+        <p><strong>Очный приём:</strong> г. Пермь, адрес сообщается при подтверждении встречи.</p>
+        <p><strong>Возраст:</strong> услуги оказываются лицам старше 18 лет. Заявки от 14 до 17 лет принимаются только с письменного согласия законного представителя.</p>
+        <p><strong>Экстренная помощь:</strong> при угрозе жизни — <a href="tel:112">112</a>, круглосуточная линия психологической помощи МЧС России — <a href="tel:+74959895050">8 (495) 989-50-50</a>.</p>
       </div>
 
       <div class="footer-bottom">
         <div>© 2026 Евгения Казакова. Все права защищены.</div>
         <div>
-          <a href="#policy" class="open-policy-modal footer-link">Политика конфиденциальности (152-ФЗ)</a>
+          <a href="privacy.html" class="footer-link">Политика обработки персональных данных</a>
         </div>
       </div>
     </div>
@@ -859,16 +952,16 @@
        Модальное окно быстрой записи
        ======================================================================== -->
   <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalBookingTitle">
-    <div class="modal-card">
+    <div class="modal-card" tabindex="-1">
       <button type="button" class="modal-close" id="closeBookingModal" aria-label="Закрыть окно">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
-      <h3 class="modal-title" id="modalBookingTitle">Запись на консультацию</h3>
-      <p class="modal-lead">Выберите наиболее удобный для вас способ первого контакта:</p>
+      <h3 class="modal-title" id="modalBookingTitle">Записаться на установочную встречу</h3>
+      <p class="modal-lead">45 минут, 5 000 ₽. Это знакомство: разбираем запрос и решаем, подходим ли мы друг другу. Оставаться в терапии после встречи не обязательно.</p>
 
       <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
-        <a href="https://t.me/KazakovaEvgeniya" target="_blank" rel="noopener" class="channel-card" style="padding: 16px 20px;" data-analytics-goal="telegram_click" data-analytics-location="modal">
+        <a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D1%83%2045%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%2C%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F%20%D0%BD%D0%B0%20%D1%8D%D1%82%D0%BE%D0%B9%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5." target="_blank" rel="noopener" class="channel-card" style="padding: 16px 20px;" data-analytics-goal="telegram_click" data-analytics-location="modal">
           <div class="channel-info">
             <div class="channel-icon tg" style="width: 36px; height: 36px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
@@ -907,36 +1000,25 @@
   </div>
 
   <!-- ========================================================================
-       Модальное окно Политики конфиденциальности (152-ФЗ)
+       Cookie-баннер: аналитика подключается только после согласия
        ======================================================================== -->
-  <div class="modal-overlay" id="policyModal" role="dialog" aria-modal="true" aria-labelledby="modalPolicyTitle">
-    <div class="modal-card policy-card">
-      <button type="button" class="modal-close" id="closePolicyModal" aria-label="Закрыть окно">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-
-      <h3 class="modal-title" id="modalPolicyTitle">Политика конфиденциальности</h3>
-      <div class="policy-body">
-        <p>
-          Настоящая Политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных оператором — психоаналитическим консультантом Евгенией Казаковой.
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieText" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-copy">
+        <p class="cookie-title" id="cookieTitle">Cookie и аналитика</p>
+        <p class="cookie-text" id="cookieText">
+          <span class="cookie-text--long">Технически необходимые cookie работают всегда. Аналитику (Яндекс.Метрика без Вебвизора) включаю только с вашего согласия: она показывает, какие разделы читают. Подробнее — в <a href="privacy.html">Политике обработки персональных данных</a>.</span>
+          <span class="cookie-text--short">Аналитика (Яндекс.Метрика) — только с вашего согласия. <a href="privacy.html">Подробнее</a>.</span>
         </p>
-        <h4>1. Обрабатываемые данные</h4>
-        <p>
-          Оператор обрабатывает следующие персональные данные Пользователя: имя, контактные данные (номер телефона, никнейм в Telegram/WhatsApp), технические данные сессии (IP-адрес, cookie-файлы). Оператор <strong>не запрашивает и не обрабатывает через форму сайта специальные категории персональных данных</strong> (сведения о здоровье, диагнозах, интимной жизни).
-        </p>
-        <h4>2. Цели обработки</h4>
-        <p>
-          Персональные данные обрабатываются исключительно с целью установления с Пользователем обратной связи для согласования организационных вопросов (дата, время и формат проведения первичной установочной сессии).
-        </p>
-        <h4>3. Сроки и безопасность</h4>
-        <p>
-          Обработка персональных данных осуществляется на законной и справедливой основе с применением необходимых правовых, организационных и технических мер защиты. Данные не передаются третьим лицам, за исключением случаев, предусмотренных законодательством РФ.
-        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="cookieDecline">Только необходимые</button>
+        <button type="button" class="btn btn-primary btn-sm" id="cookieAccept">Принять</button>
       </div>
     </div>
   </div>
 
   <!-- Скрипты -->
-  <script src="app.js?v=1.1"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tests/
+
+Sitemap: https://deniskazakov1976-glitch.github.io/kazakova-psy/sitemap.xml

@@ -1,0 +1,30 @@
+# Служебное и внутреннее — не публикуется вместе с сайтом
+.council/
+tests/_*.txt
+_build_assets.py
+_fix_faq.py
+*.py
+!tests/*.py
+images/transcript.txt
+images/segments.json
+images/evgeniya-original-portrait.jpg
+images/evgeniya-kazakova-studio.jpg
+images/evgeniya-kazakova-v3.jpg
+TZ_v2.1.md
+ANALYTICS_SETUP.md
+КОНСИЛИУМ-АНАЛИЗ.md
+ОТЧЁТ-ИСПРАВЛЕНИЯ.md
+
+# ОС
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+
+# Редакторы
+.idea/
+.vscode/
+*.swp
