@@ -116,9 +116,13 @@ function fail(name, detail) {
     results.interactions.consentErrorShown = !d.getElementById('consentError').hidden;
     results.interactions.successHiddenOnInvalid = d.getElementById('formSuccess').hidden;
 
-    // Форма: успешная доставка через Telegram (window.open подменён)
+    // Форма: успешная доставка через Telegram (перехватываем клик по ссылке)
     let openedUrl = null;
-    win.open = function (url) { openedUrl = url; return { focus() {} }; };
+    const origAnchorClick = win.HTMLAnchorElement.prototype.click;
+    win.HTMLAnchorElement.prototype.click = function () {
+      if (this.href && this.href.indexOf('t.me') > -1) { openedUrl = this.href; return; }
+      return origAnchorClick.call(this);
+    };
     d.getElementById('clientConsent').checked = true;
     d.getElementById('clientTopic').value = 'anxiety';
     form.dispatchEvent(new win.Event('submit', { bubbles: true, cancelable: true }));

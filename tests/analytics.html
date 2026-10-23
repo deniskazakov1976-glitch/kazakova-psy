@@ -88,7 +88,11 @@ function reachGoals(calls) {
     d1.getElementById('clientName').value = 'Секретное Имя';
     d1.getElementById('clientContact').value = '@secret_login';
     d1.getElementById('clientConsent').checked = true;
-    w1.open = function () { return { focus() {} }; };
+    const origAnchorClick = w1.HTMLAnchorElement.prototype.click;
+    w1.HTMLAnchorElement.prototype.click = function () {
+      if (this.href && this.href.indexOf('t.me') > -1) { return; }
+      return origAnchorClick.call(this);
+    };
     form.dispatchEvent(new w1.Event('submit', { bubbles: true, cancelable: true }));
     await sleep(200);
 

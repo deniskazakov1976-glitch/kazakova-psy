@@ -108,6 +108,20 @@ class TestLeadDelivery(unittest.TestCase):
         body = APP.split("function showSuccess", 1)[1].split("function showFailure", 1)[0]
         self.assertIn("track('form_submit'", body)
 
+    def test_telegram_opens_without_leaving_page(self):
+        """window.open(..., 'noopener') возвращает null — страница уходила в Telegram."""
+        self.assertNotIn("window.open(", APP, "window.open с noopener всегда даёт null")
+        self.assertIn("link.target = '_blank'", APP)
+        self.assertIn("link.rel = 'noopener noreferrer'", APP)
+
+    def test_messenger_links_are_tracked(self):
+        """Каждая ссылка в мессенджер должна нести цель, иначе клики не считаются."""
+        for line in INDEX.splitlines():
+            if 'href="https://t.me/' in line:
+                self.assertIn('data-analytics-goal="telegram_click"', line, line.strip()[:90])
+            if 'href="https://wa.me/' in line:
+                self.assertIn('data-analytics-goal="whatsapp_click"', line, line.strip()[:90])
+
     def test_no_topic_passed_to_analytics(self):
         for call in re.findall(r"track\([^;]*\);", APP):
             self.assertNotIn("data.topic", call, f"тема обращения уходит в аналитику: {call[:60]}")
