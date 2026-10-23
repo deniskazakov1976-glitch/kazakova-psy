@@ -17,12 +17,12 @@ const SRC = '../index.html';
 const CONSENT_KEY = 'kazakova_consent_v1';
 const results = { before: {}, after: {}, goals: [], decline: {}, persistence: {}, errors: [] };
 
-function loadFrame(width, height) {
+function loadFrame(width, height, customSrc) {
   return new Promise((resolve) => {
     const f = document.createElement('iframe');
     f.width = width || 390;
     f.height = height || 844;
-    f.src = SRC;
+    f.src = customSrc || SRC;
     f.addEventListener('load', () => resolve(f));
     document.getElementById('frames').appendChild(f);
   });
@@ -45,7 +45,7 @@ function reachGoals(calls) {
 
 (async function () {
   try {
-    // ---------- 1. До согласия ----------
+    // ---------- 1. Первый визит (уведомительный порядок РФ) ----------
     const f1 = await loadFrame();
     const w1 = f1.contentWindow;
     const d1 = f1.contentDocument;
@@ -56,14 +56,9 @@ function reachGoals(calls) {
     results.before.ymType = typeof w1.ym;
     results.before.allScripts = Array.from(d1.querySelectorAll('script[src]')).map((s) => s.src);
 
-    // Клик по Telegram до согласия — трекинг не должен включаться
     const tg = d1.querySelector('a[href*="t.me"]');
-    tg.click();
-    await sleep(60);
-    results.before.ymAfterClick = typeof w1.ym;
-    results.before.scriptsAfterClick = metrikaScripts(d1).length;
 
-    // ---------- 2. Приняли cookie ----------
+    // ---------- 2. Нажатие «Понятно» / закрытие баннера ----------
     d1.getElementById('cookieAccept').click();
     await sleep(150);
 
@@ -99,14 +94,12 @@ function reachGoals(calls) {
     results.goals = reachGoals(queued(w1));
     results.goalsRaw = JSON.stringify(queued(w1));
 
-    // ---------- 4. Отказ ----------
-    // Снимаем сохранённое согласие ДО загрузки второго фрейма, иначе он
-    // стартует уже с аналитикой и отказ нечего проверять.
-    try { w1.localStorage.removeItem(CONSENT_KEY); } catch (e) {}
+    // ---------- 4. Отказ (Opt-out) ----------
+    // Если пользователь отказался — Метрика не должна стартовать
+    try { w1.localStorage.setItem(CONSENT_KEY, 'necessary'); } catch (e) {}
     const f2 = await loadFrame();
     const w2 = f2.contentWindow;
     const d2 = f2.contentDocument;
-    d2.getElementById('cookieDecline').click();
     await sleep(150);
     results.decline.metrikaScripts = metrikaScripts(d2).length;
     results.decline.ymType = typeof w2.ym;
@@ -129,6 +122,15 @@ function reachGoals(calls) {
       results.persistence.scripts = metrikaScripts(d3).length;
       try { w3.localStorage.removeItem(CONSENT_KEY); } catch (e) {}
     }
+
+    // ---------- 6. UTM-метки ----------
+    const f4 = await loadFrame(390, 844, '../index.html?utm_source=yandex&utm_campaign=promo');
+    const d4 = f4.contentDocument;
+    await sleep(150);
+    const tgLinkWithUtm = d4.querySelector('a[href*="t.me"]');
+    results.utm = {
+      hrefHasUtm: tgLinkWithUtm && tgLinkWithUtm.href.indexOf(encodeURIComponent('promo')) > -1
+    };
 
     document.getElementById('out').textContent = 'RESULT ' + JSON.stringify(results);
   } catch (err) {

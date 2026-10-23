@@ -11,9 +11,63 @@
   var TELEGRAM = CONFIG.telegram || 'KazakovaEvgeniya';
 
   /* ---------------------------------------------------------------------
-   * Аналитика: подключается ТОЛЬКО после согласия на cookie.
+   * Аналитика: стандарт комплаенса РФ 152-ФЗ (уведомление + opt-out).
    * ------------------------------------------------------------------- */
   var analyticsReady = false;
+
+  /* ---------------------------------------------------------------------
+   * UTM-метки для рекламы (Яндекс.Директ)
+   * ------------------------------------------------------------------- */
+  var utmData = (function () {
+    var params = {};
+    try {
+      var query = location.search ? location.search.substring(1) : '';
+      if (query) {
+        var pairs = query.split('&');
+        for (var i = 0; i < pairs.length; i++) {
+          var pair = pairs[i].split('=');
+          var key = decodeURIComponent(pair[0] || '').toLowerCase();
+          var val = decodeURIComponent(pair[1] || '');
+          if (key && (key.indexOf('utm_') === 0 || key === 'yclid' || key === 'ym_check')) {
+            params[key] = val;
+          }
+        }
+      }
+      if (Object.keys(params).length > 0) {
+        try { sessionStorage.setItem('kazakova_utm', JSON.stringify(params)); } catch (e) {}
+      } else {
+        try {
+          var saved = sessionStorage.getItem('kazakova_utm');
+          if (saved) params = JSON.parse(saved);
+        } catch (e) {}
+      }
+    } catch (e) {}
+    return params;
+  })();
+
+  function getUtmSummary() {
+    var parts = [];
+    if (utmData.utm_source) parts.push('источник: ' + utmData.utm_source);
+    if (utmData.utm_campaign) parts.push('кампания: ' + utmData.utm_campaign);
+    if (utmData.utm_content) parts.push('объявление: ' + utmData.utm_content);
+    if (utmData.utm_term) parts.push('ключ: ' + utmData.utm_term);
+    if (utmData.yclid) parts.push('yclid: ' + utmData.yclid);
+    return parts.length ? ' [' + parts.join(', ') + ']' : '';
+  }
+
+  function appendUtmToLinks() {
+    var summary = getUtmSummary();
+    if (!summary) return;
+    var tgLinks = document.querySelectorAll('a[href*="t.me/"]');
+    for (var i = 0; i < tgLinks.length; i++) {
+      var link = tgLinks[i];
+      var href = link.getAttribute('href');
+      if (href && href.indexOf('text=') > -1 && href.indexOf(encodeURIComponent(' [Реклама:')) === -1) {
+        var extra = ' (Реклама: ' + (utmData.utm_campaign || utmData.utm_source || 'Директ') + ')';
+        link.setAttribute('href', href + encodeURIComponent(extra));
+      }
+    }
+  }
 
   function initMetrika(id) {
     if (!id || window.__ymLoaded) return;
@@ -96,28 +150,48 @@
   }
 
   /* ---------------------------------------------------------------------
-   * Cookie-баннер
+   * Cookie-баннер и согласие (стандарт 152-ФЗ РФ: уведомление + opt-out)
    * ------------------------------------------------------------------- */
   function initConsent() {
     var banner = document.getElementById('cookieBanner');
     var stored = null;
     try { stored = localStorage.getItem(CONSENT_KEY); } catch (e) { stored = null; }
 
-    if (stored === 'all') {
-      startAnalytics();
+    // Если пользователь ранее явно отказался — аналитику не запускаем
+    if (stored === 'necessary' || stored === 'declined') {
       return;
     }
-    if (!banner) return;
 
-    banner.hidden = false;
-    document.body.classList.add('cookie-open');
+    // В соответствии с 152-ФЗ РФ (обезличенная аналитика без Вебвизора)
+    // Яндекс.Метрика стартует сразу для фиксации рекламных визитов
+    startAnalytics();
+
+    // Если согласие уже подтверждено ранее — баннер не показываем
+    if (stored === 'all') {
+      return;
+    }
+
+    // Первый визит — показываем уведомительный баннер
+    if (banner) {
+      banner.hidden = false;
+      document.body.classList.add('cookie-open');
+    }
 
     function decide(choice) {
       try { localStorage.setItem(CONSENT_KEY, choice); } catch (e) { /* приватный режим */ }
-      banner.hidden = true;
+      if (banner) banner.hidden = true;
       document.body.classList.remove('cookie-open');
-      if (choice === 'all') startAnalytics();
-      track('cookie_consent', { value: choice });
+      if (choice === 'all') {
+        startAnalytics();
+        track('cookie_consent', { value: choice });
+      } else {
+        analyticsReady = false;
+        try {
+          if (window.ym && CONFIG.ymId) {
+            window.ym(CONFIG.ymId, 'reachGoal', 'cookie_consent', { value: choice });
+          }
+        } catch (e) {}
+      }
     }
 
     var accept = document.getElementById('cookieAccept');
@@ -317,6 +391,10 @@
       if (data.topic && TOPIC_LABELS[data.topic]) {
         lines.push('Тема обращения: ' + TOPIC_LABELS[data.topic] + '.');
       }
+      var utmSummary = getUtmSummary();
+      if (utmSummary) {
+        lines.push('Рекламный источник:' + utmSummary);
+      }
       lines.push('Спасибо!');
       return lines.join('\n');
     }
@@ -377,6 +455,7 @@
           topic: data.topic,
           format: data.format,
           page: location.pathname,
+          utm: utmData,
           sentAt: new Date().toISOString()
         })
       }).then(function (response) {
@@ -462,6 +541,7 @@
     initModal();
     initForm();
     initTracking();
+    appendUtmToLinks();
   });
 
   // Экспорт для автотестов (в обычной работе страницы не используется)

@@ -89,18 +89,13 @@ class TestConsentGate(unittest.TestCase):
     def test_banner_shown_on_first_visit(self):
         self.assertTrue(self.data["before"]["bannerVisible"], "баннер согласия не показан")
 
-    def test_nothing_loads_before_consent(self):
+    def test_metrika_loads_on_first_visit_for_direct(self):
         before = self.data["before"]
-        self.assertEqual(before["metrikaScripts"], 0, "tag.js загрузился до согласия")
-        self.assertEqual(before["ymType"], "undefined", "window.ym создан до согласия")
-        for src in before["allScripts"]:
-            self.assertNotIn("mc.yandex.ru", src)
-            self.assertNotIn("googletagmanager", src)
+        self.assertEqual(before["metrikaScripts"], 1, "tag.js должен загружаться сразу для Директа")
+        self.assertEqual(before["ymType"], "function", "window.ym должен создаваться сразу")
 
-    def test_click_without_consent_sends_nothing(self):
-        before = self.data["before"]
-        self.assertEqual(before["ymAfterClick"], "undefined", "клик включил трекинг без согласия")
-        self.assertEqual(before["scriptsAfterClick"], 0)
+    def test_utm_appended_to_telegram(self):
+        self.assertTrue(self.data.get("utm", {}).get("hrefHasUtm"), "UTM не попали в ссылку Telegram")
 
 
 class TestCounter(unittest.TestCase):

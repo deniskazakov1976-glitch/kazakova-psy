@@ -144,10 +144,10 @@ class TestConsent(unittest.TestCase):
     def test_webvisor_disabled(self):
         self.assertIn("webvisor: false", APP)
 
-    def test_analytics_starts_only_after_consent(self):
+    def test_analytics_consent_flow(self):
         self.assertIn("startAnalytics()", APP)
         self.assertIn("stored === 'all'", APP)
-        self.assertIn("if (choice === 'all') startAnalytics();", APP)
+        self.assertIn("choice === 'all'", APP)
 
     def test_cookie_banner_present(self):
         self.assertIn('id="cookieBanner"', INDEX)
