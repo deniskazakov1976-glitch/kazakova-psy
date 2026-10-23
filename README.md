@@ -36,8 +36,7 @@ tests/            — автотесты (см. ниже)
 
 - [x] **Почта.** Контакт для обращений — `nazaretcev@mail.ru` (форма, футер, политика).
 - [ ] `ANALYTICS_CONFIG.formEndpoint` — адрес вебхука (иначе заявки идут через Telegram)
-- [ ] ИНН в `index.html` (блок `.footer-legal`) и в `privacy.html` — вместо
-      `<span class="placeholder">указывается владельцем перед публикацией</span>`
+- [x] **ИНН.** 591603458837 (в футере `index.html` и в `privacy.html`).
 - [ ] Точный адрес кабинета, если его нужно публиковать
 - [ ] `ANALYTICS_CONFIG.ga4Id` / `vkPixelId` — если нужны эти счётчики
 - [x] **«Адрес сайта» в счётчике Метрики** — `deniskazakov1976-glitch.github.io`, подтверждено владельцем.

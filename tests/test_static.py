@@ -181,6 +181,10 @@ class TestLegal(unittest.TestCase):
     def test_requirements_in_footer(self):
         footer = INDEX.split("<footer", 1)[1]
         self.assertIn("ИНН", footer)
+        self.assertIn("591603458837", footer)
+        self.assertIn("591603458837", PRIVACY)
+        self.assertNotIn("указывается владельцем перед публикацией", footer)
+        self.assertNotIn("указывается владельцем перед публикацией", PRIVACY)
         self.assertIn("Оператор персональных данных", footer)
         self.assertIn("nazaretcev@mail.ru", footer)
 
