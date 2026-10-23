@@ -110,7 +110,12 @@ class TestLeadDelivery(unittest.TestCase):
 
     def test_telegram_opens_without_leaving_page(self):
         """window.open(..., 'noopener') возвращает null — страница уходила в Telegram."""
-        self.assertNotIn("window.open(", APP, "window.open с noopener всегда даёт null")
+        code = [
+            line for line in APP.splitlines()
+            if not line.strip().startswith("//") and not line.strip().startswith("*")
+        ]
+        offenders = [line for line in code if "window.open(" in line]
+        self.assertFalse(offenders, f"window.open с noopener всегда даёт null: {offenders[:1]}")
         self.assertIn("link.target = '_blank'", APP)
         self.assertIn("link.rel = 'noopener noreferrer'", APP)
 
