@@ -144,7 +144,7 @@ class TestLegal(unittest.TestCase):
     def test_privacy_page_exists_and_complete(self):
         self.assertTrue(PRIVACY, "privacy.html отсутствует")
         for needle in [
-            "152-ФЗ", "ИНН", "info@kazakova-psy.ru", "отзыв", "Отзыв",
+            "152-ФЗ", "ИНН", "nazaretcev@mail.ru", "отзыв", "Отзыв",
             "cookie", "Метрика", "18 лет", "10 рабочих дней",
             "Роскомнадзор", "Трансграничная",
         ]:
@@ -163,7 +163,7 @@ class TestLegal(unittest.TestCase):
         footer = INDEX.split("<footer", 1)[1]
         self.assertIn("ИНН", footer)
         self.assertIn("Оператор персональных данных", footer)
-        self.assertIn("info@kazakova-psy.ru", footer)
+        self.assertIn("nazaretcev@mail.ru", footer)
 
     def test_cancellation_follows_consumer_law(self):
         self.assertNotIn("пропущенная сессия оплачивается", INDEX)
