@@ -238,6 +238,11 @@ section {
   border-color: #1EBE5D;
 }
 
+.messenger-link.vk:hover {
+  color: #2787F5;
+  border-color: #2787F5;
+}
+
 /* ==========================================================================
    Шапка (Header)
    ========================================================================== */
@@ -1004,6 +1009,10 @@ section {
 
 .channel-icon.wa {
   background-color: #25D366;
+}
+
+.channel-icon.vk {
+  background-color: #2787F5;
 }
 
 .channel-text strong {

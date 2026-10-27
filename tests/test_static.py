@@ -136,6 +136,8 @@ class TestLeadDelivery(unittest.TestCase):
                 self.assertIn('data-analytics-goal="telegram_click"', line, line.strip()[:90])
             if 'href="https://wa.me/' in line:
                 self.assertIn('data-analytics-goal="whatsapp_click"', line, line.strip()[:90])
+            if 'href="https://vk.me/' in line:
+                self.assertIn('data-analytics-goal="vk_click"', line, line.strip()[:90])
 
     def test_no_topic_passed_to_analytics(self):
         for call in re.findall(r"track\([^;]*\);", APP):
