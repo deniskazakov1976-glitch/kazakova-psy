@@ -312,8 +312,8 @@ class TestPerformance(unittest.TestCase):
             self.assertNotIn("wght@0,500", link)
 
     def test_css_and_js_are_versioned(self):
-        self.assertIn("styles.css?v=2", INDEX)
-        self.assertIn("app.js?v=2", INDEX)
+        self.assertIn("styles.css?v=3", INDEX)
+        self.assertIn("app.js?v=3", INDEX)
 
 
 # --------------------------------------------------------------------------
