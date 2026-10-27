@@ -58,11 +58,11 @@
   function appendUtmToLinks() {
     var summary = getUtmSummary();
     if (!summary) return;
-    var tgLinks = document.querySelectorAll('a[href*="t.me/"]');
-    for (var i = 0; i < tgLinks.length; i++) {
-      var link = tgLinks[i];
+    var links = document.querySelectorAll('a[href*="t.me/"], a[href*="wa.me/"]');
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
       var href = link.getAttribute('href');
-      if (href && href.indexOf('text=') > -1 && href.indexOf(encodeURIComponent(' [Реклама:')) === -1) {
+      if (href && href.indexOf('text=') > -1 && href.indexOf(encodeURIComponent(' (Реклама:')) === -1) {
         var extra = ' (Реклама: ' + (utmData.utm_campaign || utmData.utm_source || 'Директ') + ')';
         link.setAttribute('href', href + encodeURIComponent(extra));
       }
@@ -533,6 +533,29 @@
   }
 
   /* ---------------------------------------------------------------------
+   * Раскрытие заметок о практике (#essays)
+   * ------------------------------------------------------------------- */
+  function initEssays() {
+    var toggles = document.querySelectorAll('.essay-toggle');
+    for (var i = 0; i < toggles.length; i++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          var targetId = btn.getAttribute('aria-controls');
+          var content = document.getElementById(targetId);
+          if (!content) return;
+          var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+          content.hidden = isExpanded;
+          btn.textContent = !isExpanded ? 'Свернуть ↑' : 'Читать далее ↓';
+          if (!isExpanded) {
+            track('essay_expand', { essay: btn.getAttribute('data-essay-id') || targetId });
+          }
+        });
+      })(toggles[i]);
+    }
+  }
+
+  /* ---------------------------------------------------------------------
    * Инициализация
    * ------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function () {
@@ -540,6 +563,7 @@
     initNav();
     initModal();
     initForm();
+    initEssays();
     initTracking();
     appendUtmToLinks();
   });

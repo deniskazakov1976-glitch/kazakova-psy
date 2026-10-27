@@ -70,10 +70,7 @@
     };
   </script>
 
-  <!-- Яндекс.Метрика, GA4 и VK Pixel подключаются из app.js ТОЛЬКО после
-       согласия на cookie (152-ФЗ, ст. 6 ч. 1 п. 1). Вебвизор отключён:
-       он записывал бы ввод в поле контакта. Никаких запросов к аналитике
-       до нажатия «Принять» не происходит. -->
+  <!-- Аналитика: 152-ФЗ РФ (уведомление + opt-out). Метрика инициализируется сразу для фиксации рекламы. Вебвизор отключён. -->
   <!-- Структурированные данные: организация, человек, FAQ -->
   <script type="application/ld+json">
   {
@@ -219,9 +216,7 @@
                 Записаться на установочную встречу
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
-              <p class="hero-cta-note">
-                Установочная встреча — это знакомство: 45 минут, 5 000 ₽. Разбираем ваш запрос и решаем, подходим ли мы друг другу. Оставаться в терапии после неё не обязательно.
-              </p>
+              <p class="hero-cta-note">Установочная встреча — 45 минут, 5 000 ₽. До записи можно <a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%B4%D0%BE%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B8." target="_blank" rel="noopener" data-analytics-goal="telegram_click" data-analytics-location="hero_note">написать в Telegram</a> и уточнить детали (свободные окна, формат, ваш запрос) — это ни к чему не обязывает.</p>
             </div>
 
             <div class="hero-messengers">
@@ -469,6 +464,11 @@
               <p class="essay-preview">
                 Феномен навязчивого повторения: как детская потребность исправить прошлое заставляет взрослого человека вновь и вновь воссоздавать травматичный сценарий с новыми людьми.
               </p>
+              <div class="essay-more" id="essay1" hidden>
+                <p>Человек не ищет страданий намеренно. Но психика устроена так, что стремится завершить то, что когда-то осталось незажившим в отношениях со значимыми фигурами детства. Выбирая эмоционально недоступного партнёра или требовательного руководителя, мы бессознательно надеемся: «В этот раз я докажу свою ценность и получу принятие».</p>
+                <p>Однако без осознания этого механизма сценарий лишь воспроизводит прежнее разочарование. В аналитической работе мы не раздаём советы «с кем расстаться», а шаг за шагом делаем скрытую логику этого выбора видимой. Когда бессознательное требование распознано, отпадает необходимость повторять его ценой собственной боли.</p>
+              </div>
+              <button type="button" class="essay-toggle" aria-expanded="false" aria-controls="essay1" data-essay-id="patterns">Читать далее ↓</button>
             </div>
             <div class="essay-author">Евгения Казакова · тезис</div>
           </article>
@@ -480,6 +480,11 @@
               <p class="essay-preview">
                 Когда все медицинские чекапы пройдены, а сердцебиение и ком в горле остаются. Почему попытки «успокоиться усилием воли» лишь усиливают панику, и что с этим делать.
               </p>
+              <div class="essay-more" id="essay2" hidden>
+                <p>Многие взрослые люди приходят в анализ с ощущением постоянного истощения. Они научились быть идеальными сотрудниками, надёжными партнёрами, заботливыми родителями, но утратили контакт с вопросом: «А чего на самом деле хочу я?». Все силы уходят на удержание внешнего контроля и подавление раздражения, вины или бессилия.</p>
+                <p>Психоаналитическое пространство позволяет безопасно ослабить эту броню. Здесь не нужно держать лицо или соответствовать ожиданиям. Постепенно возвращается способность слышать свои желания и опираться на них без разрушительного чувства вины.</p>
+              </div>
+              <button type="button" class="essay-toggle" aria-expanded="false" aria-controls="essay2" data-essay-id="anxiety">Читать далее ↓</button>
             </div>
             <div class="essay-author">Евгения Казакова · тезис</div>
           </article>
@@ -491,6 +496,11 @@
               <p class="essay-preview">
                 Честный разбор первых 45 минут: почему здесь не нужно «готовиться с конспектом», как специалист слушает бессознательные маркеры и почему терапия — это совместное исследование.
               </p>
+              <div class="essay-more" id="essay3" hidden>
+                <p>Вам не нужно заранее готовить стройный рассказ о своей жизни или формулировать безупречный запрос. Достаточно прийти с тем, что беспокоит прямо сейчас, даже если это звучит как «мне просто тяжело» или «я не знаю, с чего начать».</p>
+                <p>За 45 минут мы проясняем контекст вашей ситуации, обсуждаем организационные границы (периодичность, время, очно или онлайн) и определяем, подходит ли вам психоаналитический метод для решения возникших трудностей.</p>
+              </div>
+              <button type="button" class="essay-toggle" aria-expanded="false" aria-controls="essay3" data-essay-id="first_session">Читать далее ↓</button>
             </div>
             <div class="essay-author">Евгения Казакова · тезис</div>
           </article>
@@ -577,6 +587,17 @@
               <h4>Перинатальная психология, ПРД и родительство</h4>
               <p>Послеродовая депрессия, подготовка и сопровождение беременности, страх перед родами, эмоциональное преодоление трудностей с зачатием.</p>
             </div>
+          </div>
+        </div>
+
+        <div class="mid-cta" data-reveal>
+          <div class="mid-cta-content">
+            <h3 class="mid-cta-title">Не уверены, как сформулировать запрос?</h3>
+            <p class="mid-cta-text">К первой встрече не требуется специальной подготовки. Можно начать с короткого сообщения в мессенджере или сразу забронировать время установочной сессии.</p>
+          </div>
+          <div class="mid-cta-actions">
+            <button type="button" class="btn btn-primary open-booking-modal" data-analytics-goal="booking_click" data-analytics-location="mid_cta">Записаться на встречу</button>
+            <a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D1%82%D1%8C%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8." target="_blank" rel="noopener" class="btn btn-secondary" data-analytics-goal="telegram_click" data-analytics-location="mid_cta">Задать вопрос в Telegram</a>
           </div>
         </div>
       </div>
@@ -921,7 +942,7 @@
           <h4 class="footer-heading">Контакты</h4>
           <ul class="footer-links">
             <li><a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D1%83%2045%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%2C%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F%20%D0%BD%D0%B0%20%D1%8D%D1%82%D0%BE%D0%B9%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5." target="_blank" rel="noopener" class="footer-link" data-analytics-goal="telegram_click" data-analytics-location="footer">Telegram: @KazakovaEvgeniya</a></li>
-            <li><a href="https://wa.me/79026366133" target="_blank" rel="noopener" class="footer-link" data-analytics-goal="whatsapp_click" data-analytics-location="footer">WhatsApp: +7 (902) 636-61-33</a></li>
+            <li><a href="https://wa.me/79026366133?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0!%20%D0%9F%D0%B8%D1%88%D1%83%20%D1%81%20%D0%B2%D0%B0%D1%88%D0%B5%D0%B3%D0%BE%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B2%D0%BE%D0%B4%D1%83%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8." target="_blank" rel="noopener" class="footer-link" data-analytics-goal="whatsapp_click" data-analytics-location="footer">WhatsApp: +7 (902) 636-61-33</a></li>
             <li><a href="mailto:nazaretcev@mail.ru" class="footer-link">nazaretcev@mail.ru</a></li>
             <li><span class="footer-link footer-link--static">Очный приём: г. Пермь</span></li>
           </ul>
@@ -958,7 +979,7 @@
       </button>
 
       <h3 class="modal-title" id="modalBookingTitle">Записаться на установочную встречу</h3>
-      <p class="modal-lead">45 минут, 5 000 ₽. Это знакомство: разбираем запрос и решаем, подходим ли мы друг другу. Оставаться в терапии после встречи не обязательно.</p>
+      <p class="modal-lead">Установочная сессия длится 45 минут и стоит 5 000 ₽. Вы можете сразу выбрать время или сначала задать 1–2 организационных вопроса в переписке:</p>
 
       <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
         <a href="https://t.me/KazakovaEvgeniya?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%95%D0%B2%D0%B3%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%D0%BE%D0%B2%D0%BD%D0%B0%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%83%D1%8E%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D1%83%2045%20%D0%BC%D0%B8%D0%BD%D1%83%D1%82%2C%20%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD.%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D0%B6%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%81%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%BD%D0%BE%D0%B5%20%D0%B2%D1%80%D0%B5%D0%BC%D1%8F%20%D0%BD%D0%B0%20%D1%8D%D1%82%D0%BE%D0%B9%20%D0%BD%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5." target="_blank" rel="noopener" class="channel-card" style="padding: 16px 20px;" data-analytics-goal="telegram_click" data-analytics-location="modal">
@@ -968,7 +989,7 @@
             </div>
             <div class="channel-text">
               <strong style="font-size: 0.98rem;">Написать сразу в Telegram</strong>
-              <span style="font-size: 0.8rem;">Самый быстрый ответ</span>
+              <span style="font-size: 0.8rem;">Отвечаю лично в переписке, без звонков и ботов</span>
             </div>
           </div>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

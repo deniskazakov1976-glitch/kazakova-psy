@@ -683,7 +683,45 @@ section {
 
 .essay-preview {
   font-size: 0.94rem;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+}
+
+.essay-more {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.essay-more p {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.essay-more[hidden] {
+  display: none;
+}
+
+.essay-toggle {
+  margin-bottom: 12px;
+  min-height: 48px;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  color: var(--accent-sage);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.essay-toggle:hover {
+  color: var(--accent-sage-dark);
 }
 
 .essay-author {
@@ -740,6 +778,57 @@ section {
   font-size: 0.9rem;
   line-height: 1.6;
   margin: 0;
+}
+
+/* Промежуточный CTA в середине страницы */
+.mid-cta {
+  margin-top: 48px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-card);
+  padding: 32px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  box-shadow: var(--shadow-editorial);
+}
+
+.mid-cta-content {
+  max-width: 580px;
+}
+
+.mid-cta-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+}
+
+.mid-cta-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.mid-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 860px) {
+  .mid-cta {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 24px 20px;
+    gap: 20px;
+  }
+  .mid-cta-actions {
+    flex-direction: column;
+  }
 }
 
 /* ==========================================================================
@@ -1414,6 +1503,17 @@ body.nav-open {
   max-width: 48ch;
   font-size: 0.95rem;
   color: var(--text-secondary);
+}
+
+.hero-cta-note a {
+  color: var(--accent-sage);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+.hero-cta-note a:hover {
+  color: var(--accent-sage-dark);
 }
 
 .lead-short {

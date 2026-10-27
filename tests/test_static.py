@@ -75,6 +75,16 @@ class TestLeadDelivery(unittest.TestCase):
         for link in links:
             self.assertIn("?text=", link, f"ссылка без префилла сообщения: {link[:80]}")
 
+    def test_every_whatsapp_link_is_prefilled(self):
+        links = re.findall(r'href="(https://wa\.me/[^"]*)"', INDEX)
+        self.assertTrue(links, "не найдено ни одной ссылки WhatsApp")
+        for link in links:
+            self.assertIn("?text=", link, f"ссылка WhatsApp без префилла: {link[:80]}")
+
+    def test_mid_cta_present(self):
+        self.assertIn('class="mid-cta"', INDEX)
+        self.assertIn('data-analytics-location="mid_cta"', INDEX)
+
     def test_no_dead_policy_anchor(self):
         self.assertNotIn('href="#policy"', INDEX)
         self.assertNotIn("open-policy-modal", INDEX)
@@ -326,8 +336,12 @@ class TestAccessibility(unittest.TestCase):
 
     def test_faq_works_without_js(self):
         self.assertIn("<details", INDEX)
-        self.assertEqual(INDEX.count("<details"), 5)
+        self.assertEqual(INDEX.count("<details"), 5, "число details должно быть ровно 5 (только FAQ)")
         self.assertNotIn('class="faq-button" aria-expanded', INDEX)
+
+    def test_essays_interactive_and_no_extra_details(self):
+        self.assertGreaterEqual(INDEX.count('class="essay-toggle"'), 3)
+        self.assertGreaterEqual(INDEX.count('class="essay-more"'), 3)
 
     def test_form_labels_and_input_types(self):
         for field in ['for="clientName"', 'for="clientContact"', 'for="clientTopic"']:
