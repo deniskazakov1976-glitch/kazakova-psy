@@ -395,7 +395,133 @@ section {
   flex-wrap: wrap;
 }
 
-/* Портретный блок */
+/* Видеоблок в Hero-секции */
+.hero-video-wrapper {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero-video-card {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: linear-gradient(175deg, #EBE5DB 0%, #D8CFC2 100%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 36px rgba(25, 28, 29, 0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-facade {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #191c1d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.video-facade:hover .video-poster-img,
+.video-facade:focus-visible .video-poster-img {
+  transform: scale(1.03);
+  filter: brightness(0.92);
+}
+
+.video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.45) 100%);
+  transition: background 0.3s ease;
+}
+
+.video-facade:hover .video-play-overlay,
+.video-facade:focus-visible .video-play-overlay {
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.video-play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--accent-sage);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 20px rgba(45, 71, 57, 0.45);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease;
+  pointer-events: none;
+}
+
+.video-play-btn svg {
+  margin-left: 3px;
+}
+
+.video-facade:hover .video-play-btn,
+.video-facade:focus-visible .video-play-btn {
+  transform: scale(1.12);
+  background-color: var(--accent-sage-dark);
+}
+
+.video-play-duration {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background-color: rgba(25, 28, 29, 0.75);
+  backdrop-filter: blur(4px);
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.video-iframe-container {
+  display: none;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+.hero-video-card.is-playing .video-facade {
+  display: none;
+}
+
+.hero-video-card.is-playing .video-iframe-container {
+  display: block;
+}
+
+.hero-video-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.video-badge {
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  padding: 14px 18px;
+  border-top: 1px solid var(--border-hairline);
+}
+
+/* Портретный блок (сохранён для обратной совместимости) */
 .portrait-wrapper {
   max-width: 380px;
   margin: 0 auto;
@@ -1563,7 +1689,13 @@ body.nav-open {
   }
 
   .hero-visual {
-    order: -1;
+    order: 2;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .hero-video-wrapper {
+    max-width: 100%;
   }
 
   .portrait-wrapper {

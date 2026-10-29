@@ -291,10 +291,21 @@ class TestPerformance(unittest.TestCase):
 
     def test_picture_with_srcset_and_priority(self):
         self.assertIn("<picture>", INDEX)
-        self.assertIn("images/hero-380.webp 380w", INDEX)
+        self.assertIn("images/hero-video-poster-380.webp 380w", INDEX)
         self.assertIn('fetchpriority="high"', INDEX)
         self.assertIn('imagesrcset=', INDEX)
         self.assertIn('width="760"', INDEX)
+
+    def test_hero_video_embed(self):
+        self.assertIn("1ixvFCt7QNY", INDEX)
+        self.assertIn("youtube-nocookie.com", INDEX)
+        self.assertIn("hero-video-card", INDEX)
+        self.assertIn("video-facade", INDEX)
+        self.assertIn("video-badge", INDEX)
+
+    def test_hero_video_poster_size(self):
+        size = os.path.getsize(os.path.join(ROOT, "images", "hero-video-poster-760.webp"))
+        self.assertLess(size, 60 * 1024, f"hero-video-poster-760.webp весит {size // 1024} КБ")
 
     def test_hero_image_is_small(self):
         size = os.path.getsize(os.path.join(ROOT, "images", "hero-760.webp"))
@@ -312,8 +323,8 @@ class TestPerformance(unittest.TestCase):
             self.assertNotIn("wght@0,500", link)
 
     def test_css_and_js_are_versioned(self):
-        self.assertIn("styles.css?v=3", INDEX)
-        self.assertIn("app.js?v=3", INDEX)
+        self.assertIn("styles.css?v=4", INDEX)
+        self.assertIn("app.js?v=4", INDEX)
 
 
 # --------------------------------------------------------------------------

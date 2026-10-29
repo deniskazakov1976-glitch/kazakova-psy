@@ -556,11 +556,47 @@
   }
 
   /* ---------------------------------------------------------------------
+   * Интерактивный плеер видеообращения (#heroVideoCard)
+   * ------------------------------------------------------------------- */
+  function initHeroVideo() {
+    var card = document.getElementById('heroVideoCard');
+    if (!card) return;
+    var facade = document.getElementById('videoFacade');
+    var container = document.getElementById('videoIframeContainer');
+    var videoId = card.getAttribute('data-video-id') || '1ixvFCt7QNY';
+
+    function playVideo() {
+      if (card.classList.contains('is-playing')) return;
+      card.classList.add('is-playing');
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(videoId) + '?autoplay=1&rel=0';
+      iframe.title = 'Видеообращение: психоаналитический консультант Евгения Казакова';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.className = 'hero-video-iframe';
+      container.innerHTML = '';
+      container.appendChild(iframe);
+      track('hero_video_play', { video_id: videoId });
+    }
+
+    if (facade) {
+      facade.addEventListener('click', playVideo);
+      facade.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          playVideo();
+        }
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------------------
    * Инициализация
    * ------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function () {
     initConsent();
     initNav();
+    initHeroVideo();
     initModal();
     initForm();
     initEssays();

@@ -29,10 +29,10 @@
   <link rel="icon" type="image/png" href="images/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-  <!-- LCP-изображение: предзагрузка с учётом srcset -->
+  <!-- LCP-изображение: предзагрузка постера видеообращения с учётом srcset -->
   <link rel="preload" as="image" fetchpriority="high"
-        imagesrcset="images/hero-380.avif 380w, images/hero-760.avif 760w"
-        imagesizes="(max-width: 960px) 92vw, 380px" type="image/avif">
+        imagesrcset="images/hero-video-poster-380.avif 380w, images/hero-video-poster-760.avif 760w"
+        imagesizes="(max-width: 960px) 92vw, 480px" type="image/avif">
 
   <!-- Подключение шрифта Cormorant Garamond (только начертание 600 — используется одно) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
 
   <!-- Стили -->
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 
   <!-- ======================================================================
        Веб-аналитика и рекламные пиксели (Конфигурация)
@@ -244,16 +244,31 @@
         </div>
 
         <div class="hero-visual">
-          <div class="portrait-wrapper">
-            <div class="portrait-frame">
-              <picture>
-                <source type="image/avif" srcset="images/hero-380.avif 380w, images/hero-760.avif 760w" sizes="(max-width: 960px) 92vw, 380px">
-                <source type="image/webp" srcset="images/hero-380.webp 380w, images/hero-760.webp 760w" sizes="(max-width: 960px) 92vw, 380px">
-                <img src="images/hero-760.jpg" alt="Евгения Викторовна Казакова — психоаналитический консультант" class="portrait-img" width="760" height="1018" loading="eager" fetchpriority="high" decoding="async">
-              </picture>
-              <div class="portrait-badge">
+          <div class="hero-video-wrapper">
+            <div class="hero-video-card" id="heroVideoCard" data-video-id="1ixvFCt7QNY">
+              <!-- Интерактивный фасад с предзагруженным постером для ультрабыстрого рендера без тормозов от YouTube -->
+              <div class="video-facade" id="videoFacade" role="button" tabindex="0" aria-label="Воспроизвести видеообращение Евгении Казаковой (1 минута 16 секунд)">
+                <picture>
+                  <source type="image/avif" srcset="images/hero-video-poster-380.avif 380w, images/hero-video-poster-760.avif 760w" sizes="(max-width: 960px) 92vw, 480px">
+                  <source type="image/webp" srcset="images/hero-video-poster-380.webp 380w, images/hero-video-poster-760.webp 760w" sizes="(max-width: 960px) 92vw, 480px">
+                  <img src="images/hero-video-poster-760.jpg" alt="Евгения Викторовна Казакова — видеообращение психоаналитического консультанта" class="video-poster-img" width="760" height="428" loading="eager" fetchpriority="high" decoding="async">
+                </picture>
+                <div class="video-play-overlay">
+                  <span class="video-play-btn" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                  <span class="video-play-duration">1:16</span>
+                </div>
+              </div>
+              <!-- Контейнер для встраивания плеера по клику -->
+              <div class="video-iframe-container" id="videoIframeContainer">
+                <noscript>
+                  <iframe src="https://www.youtube-nocookie.com/embed/1ixvFCt7QNY?rel=0" title="Видеообращение: психоаналитический консультант Евгения Казакова" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="hero-video-iframe"></iframe>
+                </noscript>
+              </div>
+              <div class="video-badge">
                 <span class="badge-name">Евгения Викторовна Казакова</span>
-                <span class="badge-status">Психоаналитический консультант · 22 года практики</span>
+                <span class="badge-status">Видеообращение: в чём смысл психоаналитической терапии (1:16)</span>
               </div>
             </div>
           </div>
@@ -1075,6 +1090,6 @@
   </div>
 
   <!-- Скрипты -->
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
