@@ -1752,23 +1752,6 @@ body.nav-open {
   }
 }
 
-/* --- Блок про экстренную помощь --- */
-.crisis-note {
-  margin: 24px auto 0;
-  max-width: 60ch;
-  padding: 16px 20px;
-  background-color: var(--accent-amber-light);
-  border-left: 3px solid var(--accent-amber);
-  border-radius: var(--radius-subtle);
-  font-size: 0.95rem;
-  color: #4A3226;
-  text-align: left;
-}
-
-.crisis-note a {
-  color: #7A3F1E;
-  font-weight: 600;
-}
 
 /* --- Форма --- */
 .form-control {

@@ -228,6 +228,11 @@ class TestEthics(unittest.TestCase):
         self.assertIn("989-50-50", INDEX)
         self.assertIn("не оказываю экстренную помощь", INDEX)
 
+    def test_no_crisis_note_in_conditions(self):
+        self.assertNotIn("crisis-note", INDEX)
+        self.assertNotIn("Если сейчас остро", INDEX)
+        self.assertNotIn("При мыслях о вреде себе", INDEX)
+
     def test_session_length_consistent(self):
         self.assertNotIn("50 минут", INDEX)
         self.assertIn("45 минут", INDEX)
@@ -323,8 +328,8 @@ class TestPerformance(unittest.TestCase):
             self.assertNotIn("wght@0,500", link)
 
     def test_css_and_js_are_versioned(self):
-        self.assertIn("styles.css?v=4", INDEX)
-        self.assertIn("app.js?v=4", INDEX)
+        self.assertIn("styles.css?v=5", INDEX)
+        self.assertIn("app.js?v=5", INDEX)
 
 
 # --------------------------------------------------------------------------
