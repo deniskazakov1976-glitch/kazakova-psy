@@ -563,7 +563,7 @@
     if (!card) return;
     var facade = document.getElementById('videoFacade');
     var container = document.getElementById('videoIframeContainer');
-    var videoId = card.getAttribute('data-video-id') || '1ixvFCt7QNY';
+    var videoId = card.getAttribute('data-video-id') || 'sxHFuyc3tDk';
 
     function playVideo() {
       if (card.classList.contains('is-playing')) return;

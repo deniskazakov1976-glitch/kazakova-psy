@@ -302,7 +302,7 @@ class TestPerformance(unittest.TestCase):
         self.assertIn('width="760"', INDEX)
 
     def test_hero_video_embed(self):
-        self.assertIn("1ixvFCt7QNY", INDEX)
+        self.assertIn("sxHFuyc3tDk", INDEX)
         self.assertIn("youtube-nocookie.com", INDEX)
         self.assertIn("hero-video-card", INDEX)
         self.assertIn("video-facade", INDEX)
